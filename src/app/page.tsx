@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useLanguage } from "@/lib/LanguageContext";
 import EventCard from "@/components/EventCard";
 import WhatWeDoCards from "@/components/WhatWeDoCards";
@@ -51,27 +52,40 @@ export default function Home() {
             {t.featuredEvent.tag}
           </span>
           <div className="bg-gradient-to-br from-[#4DA2FF]/5 to-[#00D4B4]/5 border border-[#4DA2FF]/20 rounded-2xl p-8 md:p-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
-              {t.featuredEvent.name}
-            </h2>
-            <p className="text-[#4DA2FF] text-lg mb-4">
-              {t.featuredEvent.dates}
-            </p>
-            <p className="text-gray-300 text-lg max-w-2xl mb-8">
-              {t.featuredEvent.description}
-            </p>
-            <div className="flex flex-wrap gap-6 text-sm text-gray-400 mb-8">
-              <span>📅 {t.featuredEvent.dateDetail}</span>
-              <span>📍 {t.featuredEvent.locationDetail}</span>
-              <span>👥 {t.featuredEvent.spots}</span>
-              <span>🆓 {t.featuredEvent.price}</span>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
+                  {t.featuredEvent.name}
+                </h2>
+                <p className="text-[#4DA2FF] text-lg mb-4">
+                  {t.featuredEvent.dates}
+                </p>
+                <p className="text-gray-300 text-lg max-w-2xl mb-8">
+                  {t.featuredEvent.description}
+                </p>
+                <div className="flex flex-wrap gap-6 text-sm text-gray-400 mb-8">
+                  <span>📅 {t.featuredEvent.dateDetail}</span>
+                  <span>📍 {t.featuredEvent.locationDetail}</span>
+                  <span>👥 {t.featuredEvent.spots}</span>
+                  <span>🆓 {t.featuredEvent.price}</span>
+                </div>
+                <Link
+                  href="/events/making-the-ai-move"
+                  className="inline-block px-8 py-4 bg-[#00D4B4] hover:bg-[#00b89d] text-[#0A1628] font-bold rounded-lg transition-colors text-lg"
+                >
+                  {t.featuredEvent.cta}
+                </Link>
+              </div>
+              <div className="flex justify-center">
+                <Image
+                  src="/images/events/making-the-ai-move.png"
+                  alt="Sui Workshop — Making the AI Move"
+                  width={480}
+                  height={480}
+                  className="rounded-2xl shadow-2xl w-full max-w-[480px] h-auto"
+                />
+              </div>
             </div>
-            <Link
-              href="/events/making-the-ai-move"
-              className="inline-block px-8 py-4 bg-[#00D4B4] hover:bg-[#00b89d] text-[#0A1628] font-bold rounded-lg transition-colors text-lg"
-            >
-              {t.featuredEvent.cta}
-            </Link>
           </div>
         </div>
       </section>

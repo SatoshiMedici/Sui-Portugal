@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useLanguage } from "@/lib/LanguageContext";
 
 const day1Schedule = [
@@ -42,26 +43,40 @@ export default function MakingTheAIMovePage() {
       {/* Hero */}
       <section className="bg-[#0A1628] py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-3">
-            Making the AI Move
-          </h1>
-          <p className="text-[#4DA2FF] text-xl mb-8">
-            {t.eventDetail.subtitle}
-          </p>
-          <div className="flex flex-wrap gap-6 text-gray-400 mb-8">
-            <span>📅 {t.featuredEvent.dateDetail}</span>
-            <span>📍 {t.featuredEvent.locationDetail}</span>
-            <span>👥 {t.featuredEvent.spots}</span>
-            <span>🆓 {t.featuredEvent.price}</span>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-3">
+                Making the AI Move
+              </h1>
+              <p className="text-[#4DA2FF] text-xl mb-8">
+                {t.eventDetail.subtitle}
+              </p>
+              <div className="flex flex-wrap gap-6 text-gray-400 mb-8">
+                <span>📅 {t.featuredEvent.dateDetail}</span>
+                <span>📍 {t.featuredEvent.locationDetail}</span>
+                <span>👥 {t.featuredEvent.spots}</span>
+                <span>🆓 {t.featuredEvent.price}</span>
+              </div>
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block px-8 py-4 bg-[#00D4B4] hover:bg-[#00b89d] text-[#0A1628] font-bold rounded-lg transition-colors text-lg"
+              >
+                {t.eventDetail.registerCta}
+              </a>
+            </div>
+            <div className="flex justify-center">
+              <Image
+                src="/images/events/making-the-ai-move.png"
+                alt="Sui Workshop — Making the AI Move"
+                width={540}
+                height={540}
+                className="rounded-2xl shadow-2xl w-full max-w-[540px] h-auto"
+                priority
+              />
+            </div>
           </div>
-          <a
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block px-8 py-4 bg-[#00D4B4] hover:bg-[#00b89d] text-[#0A1628] font-bold rounded-lg transition-colors text-lg"
-          >
-            {t.eventDetail.registerCta}
-          </a>
         </div>
       </section>
 
