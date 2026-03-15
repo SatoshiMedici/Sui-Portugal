@@ -168,7 +168,7 @@ export const translations = {
         "Sessões práticas de Move, desenvolvimento em Sui e construção de aplicações reais.",
       card2Title: "Activações Comunitárias",
       card2Body:
-        "Watch parties, meet-ups e sessões do ecossistema para integrar investidores, builders e entusiastas no Sui.",
+        "Watch parties, meet-ups e sessões do ecossistema para fazer o onboarding de investidores, builders e entusiastas para Sui.",
       card3Title: "Activação de Builders",
       card3Body:
         "Conectamos developers locais com grants, hackathons e oportunidades no ecossistema Sui.",
