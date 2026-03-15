@@ -38,7 +38,7 @@ export const translations = {
         "Watch parties, meet-ups, and ecosystem sessions to onboard investors, builders and enthusiasts to Sui.",
       card3Title: "Builder Activation",
       card3Body:
-        "Connecting local developers with grants, hackathons, and opportunities in the broader Sui ecosystem.",
+        "Educating and connecting developers through workshops, hackathons, and opportunities in the broader Sui ecosystem.",
     },
     upcomingEvents: {
       heading: "Upcoming events",
