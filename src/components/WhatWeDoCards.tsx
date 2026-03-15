@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { useLanguage } from "@/lib/LanguageContext";
 
 interface VideoCardProps {
@@ -10,6 +10,7 @@ interface VideoCardProps {
 }
 
 function VideoCard({ videoId, title }: VideoCardProps) {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
   const [muted, setMuted] = useState(true);
   const [origin, setOrigin] = useState("");
 
@@ -17,22 +18,51 @@ function VideoCard({ videoId, title }: VideoCardProps) {
     setOrigin(window.location.origin);
   }, []);
 
-  const baseParams = `autoplay=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&cc_load_policy=0`;
-  const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?${baseParams}&mute=${muted ? 1 : 0}${origin ? `&origin=${origin}` : ""}`;
+  // Stable iframe src — never changes after mount so the video doesn't reload
+  const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&cc_load_policy=0&enablejsapi=1${origin ? `&origin=${origin}` : ""}`;
+
+  const postCommand = useCallback((func: string, args: unknown[] = []) => {
+    iframeRef.current?.contentWindow?.postMessage(
+      JSON.stringify({ event: "command", func, args }),
+      "*"
+    );
+  }, []);
+
+  const toggleSound = () => {
+    if (muted) {
+      postCommand("unMute");
+      postCommand("setVolume", [100]);
+    } else {
+      postCommand("mute");
+    }
+    setMuted(!muted);
+  };
 
   return (
-    <div className="relative overflow-hidden group">
+    <div className="relative overflow-hidden">
+      {/* Scale up to crop YouTube title/watermark area */}
       <div className="relative w-full aspect-video overflow-hidden">
         <iframe
-          src={embedUrl}
+          ref={iframeRef}
+          src={origin ? embedUrl : undefined}
           title={title}
-          className="absolute inset-0 w-full h-full scale-[1.05] pointer-events-none"
+          className="absolute w-full h-full pointer-events-none"
+          style={{
+            top: "-10%",
+            left: "-5%",
+            width: "110%",
+            height: "120%",
+          }}
           allow="autoplay; encrypted-media"
         />
       </div>
+      {/* Opaque strip at top to cover any YouTube title that briefly appears */}
+      <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/80 to-transparent pointer-events-none" />
+      {/* Opaque strip at bottom to cover YouTube watermark */}
+      <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
       {/* Sound toggle button */}
       <button
-        onClick={() => setMuted(!muted)}
+        onClick={toggleSound}
         className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center transition-colors"
         aria-label={muted ? "Unmute video" : "Mute video"}
       >
