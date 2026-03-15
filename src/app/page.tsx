@@ -5,6 +5,7 @@ import { useLanguage } from "@/lib/LanguageContext";
 import EventCard from "@/components/EventCard";
 import WhatWeDoCards from "@/components/WhatWeDoCards";
 import CommunityCTA from "@/components/CommunityCTA";
+import HeroSlideshow from "@/components/HeroSlideshow";
 
 export default function Home() {
   const { t } = useLanguage();
@@ -13,21 +14,10 @@ export default function Home() {
     <>
       {/* Hero */}
       <section className="relative bg-[#0A1628] min-h-[90vh] flex items-center overflow-hidden">
-        {/* Particle grid background */}
-        <div className="absolute inset-0 opacity-20">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle at 1px 1px, rgba(77,162,255,0.3) 1px, transparent 0)",
-              backgroundSize: "40px 40px",
-            }}
-          />
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#4DA2FF]/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-[#00D4B4]/10 rounded-full blur-3xl" />
-        </div>
+        {/* Slideshow background */}
+        <HeroSlideshow />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <p className="text-[#4DA2FF] font-medium text-sm tracking-wider uppercase mb-4">
             {t.hero.eyebrow}
           </p>
