@@ -58,7 +58,7 @@ function VideoCard({ videoId, title, description }: VideoCardProps) {
   const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&cc_load_policy=0&enablejsapi=1&origin=${typeof window !== "undefined" ? window.location.origin : ""}`;
 
   return (
-    <div className="relative rounded-2xl overflow-hidden group">
+    <div className="relative overflow-hidden group">
       {/* Scale up slightly and crop to hide any remaining YouTube watermarks */}
       <div className="relative w-full aspect-video overflow-hidden">
         <iframe
@@ -123,11 +123,10 @@ export default function WhatWeDoCards() {
 
   return (
     <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-[#1A1A2E] text-center mb-12">
-          {t.whatWeDo.heading}
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <h2 className="text-3xl font-bold text-[#1A1A2E] text-center mb-12 px-4">
+        {t.whatWeDo.heading}
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-2">
           <VideoCard
             videoId="aCwi8uXMA8A"
             title={t.whatWeDo.card2Title}
@@ -138,7 +137,6 @@ export default function WhatWeDoCards() {
             title={t.whatWeDo.card3Title}
             description={t.whatWeDo.card3Body}
           />
-        </div>
       </div>
     </section>
   );
