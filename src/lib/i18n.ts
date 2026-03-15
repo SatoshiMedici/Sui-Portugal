@@ -169,9 +169,9 @@ export const translations = {
       card2Title: "Activações Comunitárias",
       card2Body:
         "Watch parties, meet-ups e sessões do ecossistema para fazer o onboarding de investidores, builders e entusiastas para Sui.",
-      card3Title: "Activação de Builders",
+      card3Title: "Ativação de Builders",
       card3Body:
-        "Conectamos developers locais com grants, hackathons e oportunidades no ecossistema Sui.",
+        "Educar e conectar desenvolvedores através de workshops, hackathons e oportunidades no ecossistema mais amplo da Sui.",
     },
     upcomingEvents: {
       heading: "Próximos eventos",
