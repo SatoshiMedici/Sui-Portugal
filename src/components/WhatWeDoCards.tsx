@@ -11,7 +11,7 @@ interface VideoCardProps {
   onToggleSound: () => void;
 }
 
-function VideoCard({ videoId, title, isUnmuted, onToggleSound }: VideoCardProps) {
+function VideoCard({ videoId, title, description, isUnmuted, onToggleSound }: VideoCardProps) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [origin, setOrigin] = useState("");
 
@@ -59,8 +59,11 @@ function VideoCard({ videoId, title, isUnmuted, onToggleSound }: VideoCardProps)
       </div>
       {/* Opaque strip at top to cover any YouTube title that briefly appears */}
       <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/80 to-transparent pointer-events-none" />
-      {/* Opaque strip at bottom to cover YouTube watermark */}
-      <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
+      {/* Title and description overlay at bottom */}
+      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent pointer-events-none px-5 pb-5 pt-12">
+        <h3 className="text-white text-lg font-semibold">{title}</h3>
+        <p className="text-white/80 text-sm mt-1 leading-relaxed">{description}</p>
+      </div>
       {/* Sound toggle button */}
       <button
         onClick={onToggleSound}
