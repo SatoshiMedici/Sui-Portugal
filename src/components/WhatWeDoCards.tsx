@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useCallback, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useLanguage } from "@/lib/LanguageContext";
 
 interface VideoCardProps {
@@ -9,76 +9,30 @@ interface VideoCardProps {
   description: string;
 }
 
-function VideoCard({ videoId, title, description }: VideoCardProps) {
-  const iframeRef = useRef<HTMLIFrameElement>(null);
+function VideoCard({ videoId, title }: VideoCardProps) {
   const [muted, setMuted] = useState(true);
-  const [playerReady, setPlayerReady] = useState(false);
-
-  // Post a command to the YouTube iframe player API
-  const postCommand = useCallback(
-    (func: string, args: unknown[] = []) => {
-      if (iframeRef.current?.contentWindow) {
-        iframeRef.current.contentWindow.postMessage(
-          JSON.stringify({ event: "command", func, args }),
-          "https://www.youtube.com"
-        );
-      }
-    },
-    []
-  );
+  const [origin, setOrigin] = useState("");
 
   useEffect(() => {
-    const handleMessage = (e: MessageEvent) => {
-      if (e.origin !== "https://www.youtube.com") return;
-      try {
-        const data = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
-        if (data.event === "onReady") {
-          setPlayerReady(true);
-        }
-      } catch {
-        // ignore non-JSON messages
-      }
-    };
-    window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
+    setOrigin(window.location.origin);
   }, []);
 
-  const toggleSound = () => {
-    if (!playerReady) return;
-    if (muted) {
-      postCommand("unMute");
-      postCommand("setVolume", [100]);
-    } else {
-      postCommand("mute");
-    }
-    setMuted(!muted);
-  };
-
-  // YouTube nocookie embed — all branding/UI disabled
-  const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&cc_load_policy=0&enablejsapi=1&origin=${typeof window !== "undefined" ? window.location.origin : ""}`;
+  const baseParams = `autoplay=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&cc_load_policy=0`;
+  const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?${baseParams}&mute=${muted ? 1 : 0}${origin ? `&origin=${origin}` : ""}`;
 
   return (
     <div className="relative overflow-hidden group">
-      {/* Scale up slightly and crop to hide any remaining YouTube watermarks */}
       <div className="relative w-full aspect-video overflow-hidden">
         <iframe
-          ref={iframeRef}
           src={embedUrl}
           title={title}
           className="absolute inset-0 w-full h-full scale-[1.05] pointer-events-none"
           allow="autoplay; encrypted-media"
         />
       </div>
-      {/* Subtle gradient overlay at the bottom for text */}
-      <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/70 to-transparent pointer-events-none" />
-      {/* Title & description */}
-      <div className="absolute bottom-0 inset-x-0 p-6 pointer-events-none">
-        <h3 className="text-xl font-bold text-white mb-1">{title}</h3>
-        <p className="text-white/80 text-sm leading-relaxed">{description}</p>
-      </div>
       {/* Sound toggle button */}
       <button
-        onClick={toggleSound}
+        onClick={() => setMuted(!muted)}
         className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center transition-colors"
         aria-label={muted ? "Unmute video" : "Mute video"}
       >
