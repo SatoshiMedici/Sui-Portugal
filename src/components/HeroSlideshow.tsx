@@ -29,7 +29,7 @@ export default function HeroSlideshow() {
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(next, 5000);
+    const interval = setInterval(next, 3000);
     return () => clearInterval(interval);
   }, [next]);
 
@@ -52,7 +52,7 @@ export default function HeroSlideshow() {
         </div>
       ))}
       {/* Dark overlay for text readability */}
-      <div className="absolute inset-0 bg-[#0A1628]/70" />
+      <div className="absolute inset-0 bg-[#0A1628]/40" />
     </div>
   );
 }
