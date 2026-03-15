@@ -1,47 +1,85 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import { useLanguage } from "@/lib/LanguageContext";
 
 interface VideoCardProps {
-  src: string;
+  videoId: string;
   title: string;
   description: string;
 }
 
-function VideoCard({ src, title, description }: VideoCardProps) {
-  const videoRef = useRef<HTMLVideoElement>(null);
+function VideoCard({ videoId, title, description }: VideoCardProps) {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
   const [muted, setMuted] = useState(true);
+  const [playerReady, setPlayerReady] = useState(false);
+
+  // Post a command to the YouTube iframe player API
+  const postCommand = useCallback(
+    (func: string, args: unknown[] = []) => {
+      if (iframeRef.current?.contentWindow) {
+        iframeRef.current.contentWindow.postMessage(
+          JSON.stringify({ event: "command", func, args }),
+          "https://www.youtube.com"
+        );
+      }
+    },
+    []
+  );
+
+  useEffect(() => {
+    const handleMessage = (e: MessageEvent) => {
+      if (e.origin !== "https://www.youtube.com") return;
+      try {
+        const data = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
+        if (data.event === "onReady") {
+          setPlayerReady(true);
+        }
+      } catch {
+        // ignore non-JSON messages
+      }
+    };
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, []);
 
   const toggleSound = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = !videoRef.current.muted;
-      setMuted(videoRef.current.muted);
+    if (!playerReady) return;
+    if (muted) {
+      postCommand("unMute");
+      postCommand("setVolume", [100]);
+    } else {
+      postCommand("mute");
     }
+    setMuted(!muted);
   };
+
+  // YouTube embed with autoplay, loop, muted, no controls
+  const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&modestbranding=1&enablejsapi=1&origin=${typeof window !== "undefined" ? window.location.origin : ""}`;
 
   return (
     <div className="relative rounded-2xl overflow-hidden group">
-      <video
-        ref={videoRef}
-        src={src}
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="w-full aspect-video object-cover"
-      />
+      <div className="relative w-full aspect-video">
+        <iframe
+          ref={iframeRef}
+          src={embedUrl}
+          title={title}
+          className="absolute inset-0 w-full h-full"
+          allow="autoplay; encrypted-media"
+          allowFullScreen
+        />
+      </div>
       {/* Subtle gradient overlay at the bottom for text */}
-      <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/70 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/70 to-transparent pointer-events-none" />
       {/* Title & description */}
-      <div className="absolute bottom-0 inset-x-0 p-6">
+      <div className="absolute bottom-0 inset-x-0 p-6 pointer-events-none">
         <h3 className="text-xl font-bold text-white mb-1">{title}</h3>
         <p className="text-white/80 text-sm leading-relaxed">{description}</p>
       </div>
       {/* Sound toggle button */}
       <button
         onClick={toggleSound}
-        className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center transition-colors"
+        className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center transition-colors"
         aria-label={muted ? "Unmute video" : "Mute video"}
       >
         {muted ? (
@@ -91,12 +129,12 @@ export default function WhatWeDoCards() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <VideoCard
-            src="/videos/meetup.mp4"
+            videoId="YOUR_MEETUP_VIDEO_ID"
             title={t.whatWeDo.card2Title}
             description={t.whatWeDo.card2Body}
           />
           <VideoCard
-            src="/videos/builders-activation.mp4"
+            videoId="YOUR_BUILDERS_VIDEO_ID"
             title={t.whatWeDo.card3Title}
             description={t.whatWeDo.card3Body}
           />
