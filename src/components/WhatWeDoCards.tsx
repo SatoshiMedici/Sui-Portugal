@@ -7,11 +7,12 @@ interface VideoCardProps {
   videoId: string;
   title: string;
   description: string;
+  isUnmuted: boolean;
+  onToggleSound: () => void;
 }
 
-function VideoCard({ videoId, title }: VideoCardProps) {
+function VideoCard({ videoId, title, isUnmuted, onToggleSound }: VideoCardProps) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const [muted, setMuted] = useState(true);
   const [origin, setOrigin] = useState("");
 
   useEffect(() => {
@@ -28,15 +29,15 @@ function VideoCard({ videoId, title }: VideoCardProps) {
     );
   }, []);
 
-  const toggleSound = () => {
-    if (muted) {
+  // Sync mute/unmute state via postMessage whenever isUnmuted changes
+  useEffect(() => {
+    if (isUnmuted) {
       postCommand("unMute");
       postCommand("setVolume", [100]);
     } else {
       postCommand("mute");
     }
-    setMuted(!muted);
-  };
+  }, [isUnmuted, postCommand]);
 
   return (
     <div className="relative overflow-hidden">
@@ -62,11 +63,11 @@ function VideoCard({ videoId, title }: VideoCardProps) {
       <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
       {/* Sound toggle button */}
       <button
-        onClick={toggleSound}
+        onClick={onToggleSound}
         className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center transition-colors"
-        aria-label={muted ? "Unmute video" : "Mute video"}
+        aria-label={isUnmuted ? "Mute video" : "Unmute video"}
       >
-        {muted ? (
+        {!isUnmuted ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -104,6 +105,12 @@ function VideoCard({ videoId, title }: VideoCardProps) {
 
 export default function WhatWeDoCards() {
   const { t } = useLanguage();
+  // null = both muted, "video1" or "video2" = that one is unmuted
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
+
+  const toggleVideo = (id: string) => {
+    setActiveVideo((prev) => (prev === id ? null : id));
+  };
 
   return (
     <section className="py-20 bg-white">
@@ -115,11 +122,15 @@ export default function WhatWeDoCards() {
             videoId="aCwi8uXMA8A"
             title={t.whatWeDo.card2Title}
             description={t.whatWeDo.card2Body}
+            isUnmuted={activeVideo === "video1"}
+            onToggleSound={() => toggleVideo("video1")}
           />
           <VideoCard
             videoId="GE-LTKNCBtA"
             title={t.whatWeDo.card3Title}
             description={t.whatWeDo.card3Body}
+            isUnmuted={activeVideo === "video2"}
+            onToggleSound={() => toggleVideo("video2")}
           />
       </div>
     </section>
