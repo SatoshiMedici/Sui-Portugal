@@ -129,7 +129,7 @@ export default function WhatWeDoCards() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <VideoCard
-            videoId="YOUR_MEETUP_VIDEO_ID"
+            videoId="aCwi8uXMA8A"
             title={t.whatWeDo.card2Title}
             description={t.whatWeDo.card2Body}
           />
