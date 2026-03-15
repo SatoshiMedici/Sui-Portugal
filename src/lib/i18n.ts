@@ -33,9 +33,9 @@ export const translations = {
       card1Title: "Developer Workshops",
       card1Body:
         "Hands-on sessions teaching Move, Sui development, and how to build real applications on Sui.",
-      card2Title: "Community Events",
+      card2Title: "Community Activations",
       card2Body:
-        "Watch parties, meetups, and ecosystem sessions connecting the Portuguese Sui community.",
+        "Watch parties, meet-ups, and ecosystem sessions to onboard investors, builders and enthusiasts to Sui.",
       card3Title: "Builder Activation",
       card3Body:
         "Connecting local developers with grants, hackathons, and opportunities in the broader Sui ecosystem.",
@@ -166,9 +166,9 @@ export const translations = {
       card1Title: "Workshops para Developers",
       card1Body:
         "Sessões práticas de Move, desenvolvimento em Sui e construção de aplicações reais.",
-      card2Title: "Eventos Comunitários",
+      card2Title: "Activações Comunitárias",
       card2Body:
-        "Watch parties, meetups e sessões do ecossistema que ligam a comunidade Sui portuguesa.",
+        "Watch parties, meet-ups e sessões do ecossistema para integrar investidores, builders e entusiastas no Sui.",
       card3Title: "Activação de Builders",
       card3Body:
         "Conectamos developers locais com grants, hackathons e oportunidades no ecossistema Sui.",
