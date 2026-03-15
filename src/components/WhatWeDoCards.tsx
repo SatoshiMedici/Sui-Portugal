@@ -54,19 +54,19 @@ function VideoCard({ videoId, title, description }: VideoCardProps) {
     setMuted(!muted);
   };
 
-  // YouTube embed with autoplay, loop, muted, no controls
-  const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&modestbranding=1&enablejsapi=1&origin=${typeof window !== "undefined" ? window.location.origin : ""}`;
+  // YouTube nocookie embed — all branding/UI disabled
+  const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&cc_load_policy=0&enablejsapi=1&origin=${typeof window !== "undefined" ? window.location.origin : ""}`;
 
   return (
     <div className="relative rounded-2xl overflow-hidden group">
-      <div className="relative w-full aspect-video">
+      {/* Scale up slightly and crop to hide any remaining YouTube watermarks */}
+      <div className="relative w-full aspect-video overflow-hidden">
         <iframe
           ref={iframeRef}
           src={embedUrl}
           title={title}
-          className="absolute inset-0 w-full h-full"
+          className="absolute inset-0 w-full h-full scale-[1.05] pointer-events-none"
           allow="autoplay; encrypted-media"
-          allowFullScreen
         />
       </div>
       {/* Subtle gradient overlay at the bottom for text */}
