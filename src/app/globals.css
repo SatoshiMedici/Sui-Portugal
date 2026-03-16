@@ -14,3 +14,183 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* ── Scroll-triggered animations ── */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.animate-on-scroll.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children */
+.stagger-children > .animate-on-scroll:nth-child(1) { transition-delay: 0ms; }
+.stagger-children > .animate-on-scroll:nth-child(2) { transition-delay: 100ms; }
+.stagger-children > .animate-on-scroll:nth-child(3) { transition-delay: 200ms; }
+.stagger-children > .animate-on-scroll:nth-child(4) { transition-delay: 300ms; }
+.stagger-children > .animate-on-scroll:nth-child(5) { transition-delay: 400ms; }
+.stagger-children > .animate-on-scroll:nth-child(6) { transition-delay: 500ms; }
+
+/* Fade-in variants */
+.animate-fade-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.animate-fade-left.in-view {
+  opacity: 1;
+  transform: translateX(0);
+}
+.animate-fade-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.animate-fade-right.in-view {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Keyframe animations ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes hero-text-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.animate-float { animation: float 4s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 6s ease infinite;
+}
+.animate-hero-text {
+  animation: hero-text-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.animate-hero-text-delay-1 {
+  animation: hero-text-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+.animate-hero-text-delay-2 {
+  animation: hero-text-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+.animate-hero-text-delay-3 {
+  animation: hero-text-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+}
+
+/* ── Card hover enhancements ── */
+.card-hover {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px -12px rgba(77, 162, 255, 0.2);
+}
+
+/* ── Button shine effect ── */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+}
+.btn-shine:hover::after {
+  left: 125%;
+}
+
+/* ── Glow accents ── */
+.glow-blue {
+  box-shadow: 0 0 40px -8px rgba(77, 162, 255, 0.3);
+}
+.glow-teal {
+  box-shadow: 0 0 40px -8px rgba(0, 212, 180, 0.3);
+}
+
+/* ── Navbar scroll effect ── */
+.navbar-scrolled {
+  background: rgba(10, 22, 40, 0.98) !important;
+  backdrop-filter: blur(16px) saturate(180%);
+  box-shadow: 0 1px 24px -4px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Section dividers ── */
+.section-fade-top {
+  position: relative;
+}
+.section-fade-top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, #0A1628, transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-on-scroll,
+  .animate-fade-left,
+  .animate-fade-right {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .animate-float,
+  .animate-pulse-glow,
+  .animate-gradient {
+    animation: none;
+  }
+  .animate-hero-text,
+  .animate-hero-text-delay-1,
+  .animate-hero-text-delay-2,
+  .animate-hero-text-delay-3 {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}

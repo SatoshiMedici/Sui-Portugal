@@ -116,8 +116,8 @@ export default function WhatWeDoCards() {
   };
 
   return (
-    <section className="py-20 bg-white">
-      <h2 className="text-3xl font-bold text-[#1A1A2E] text-center mb-12 px-4">
+    <section className="py-20 bg-white overflow-hidden">
+      <h2 className="animate-on-scroll text-3xl font-bold text-[#1A1A2E] text-center mb-12 px-4">
         {t.whatWeDo.heading}
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2">

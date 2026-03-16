@@ -1,9 +1,11 @@
 "use client";
 
 import { useLanguage } from "@/lib/LanguageContext";
+import { useScrollAnimations } from "@/hooks/useInView";
 
 export default function CommunityPage() {
   const { t } = useLanguage();
+  useScrollAnimations();
 
   const channels = [
     {
@@ -45,24 +47,24 @@ export default function CommunityPage() {
     <>
       <section className="bg-[#0A1628] py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-white">
+          <h1 className="animate-hero-text text-4xl md:text-5xl font-bold text-white">
             {t.communityPage.heading}
           </h1>
         </div>
       </section>
 
       <section className="py-20 bg-gray-50 min-h-[50vh]">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 stagger-children">
           {channels.map((channel) => (
             <a
               key={channel.name}
               href={channel.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="block bg-white rounded-xl p-8 border border-gray-200 hover:border-[#4DA2FF]/40 hover:shadow-lg transition-all group"
+              className="animate-on-scroll card-hover block bg-white rounded-xl p-8 border border-gray-200 hover:border-[#4DA2FF]/40 group"
             >
               <div className="flex items-start gap-6">
-                <div className="text-[#4DA2FF] flex-shrink-0">
+                <div className="text-[#4DA2FF] flex-shrink-0 transition-transform duration-300 group-hover:scale-110">
                   {channel.icon}
                 </div>
                 <div className="flex-1">
@@ -70,8 +72,11 @@ export default function CommunityPage() {
                     {channel.name}
                   </h3>
                   <p className="text-[#6B7280] mb-4">{channel.desc}</p>
-                  <span className="text-[#4DA2FF] font-medium group-hover:text-[#3d8de6] transition-colors">
+                  <span className="inline-flex items-center gap-1 text-[#4DA2FF] font-medium group-hover:text-[#3d8de6] transition-all duration-300">
                     {channel.cta}
+                    <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
                   </span>
                 </div>
               </div>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useLanguage } from "@/lib/LanguageContext";
 import { CalendarIcon, LocationIcon, PeopleIcon, FreeIcon } from "@/components/Icons";
+import { useScrollAnimations } from "@/hooks/useInView";
 
 const day1Schedule = [
   { time: "11:00 – 11:15", en: "Arrival, coffee, toolchain check", pt: "Chegada, café, verificação de ferramentas" },
@@ -36,23 +37,26 @@ const prerequisites = [
 export default function MakingTheAIMovePage() {
   const { locale, t } = useLanguage();
   const [activeDay, setActiveDay] = useState<1 | 2>(1);
+  useScrollAnimations();
 
   const schedule = activeDay === 1 ? day1Schedule : day2Schedule;
 
   return (
     <>
       {/* Hero */}
-      <section className="bg-[#0A1628] py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="bg-[#0A1628] py-20 relative overflow-hidden">
+        <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] bg-[#4DA2FF]/5 rounded-full blur-3xl animate-pulse-glow pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-3">
+              <h1 className="animate-hero-text text-4xl md:text-5xl font-bold text-white mb-3">
                 Making the AI Move
               </h1>
-              <p className="text-[#4DA2FF] text-xl mb-8">
+              <p className="animate-hero-text-delay-1 text-[#4DA2FF] text-xl mb-8">
                 {t.eventDetail.subtitle}
               </p>
-              <div className="flex flex-wrap gap-6 text-gray-400 mb-8">
+              <div className="animate-hero-text-delay-2 flex flex-wrap gap-6 text-gray-400 mb-8">
                 <span className="flex items-center gap-1.5"><CalendarIcon /> {t.featuredEvent.dateDetail}</span>
                 <span className="flex items-center gap-1.5"><LocationIcon /> {t.featuredEvent.locationDetail}</span>
                 <span className="flex items-center gap-1.5"><PeopleIcon /> {t.featuredEvent.spots}</span>
@@ -62,18 +66,18 @@ export default function MakingTheAIMovePage() {
                 href="https://luma.com/wha9jsu2"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block px-8 py-4 bg-[#00D4B4] hover:bg-[#00b89d] text-[#0A1628] font-bold rounded-lg transition-colors text-lg"
+                className="animate-hero-text-delay-3 btn-shine inline-block px-8 py-4 bg-[#00D4B4] hover:bg-[#00b89d] text-[#0A1628] font-bold rounded-lg transition-all duration-300 text-lg hover:shadow-lg hover:shadow-[#00D4B4]/25 hover:-translate-y-0.5"
               >
                 {t.eventDetail.registerCta}
               </a>
             </div>
-            <div className="flex justify-center">
+            <div className="animate-fade-right flex justify-center">
               <Image
                 src="/images/events/making-the-ai-move.png"
                 alt="Sui Workshop — Making the AI Move"
                 width={540}
                 height={540}
-                className="rounded-2xl shadow-2xl w-full max-w-[540px] h-auto"
+                className="rounded-2xl shadow-2xl w-full max-w-[540px] h-auto transition-transform duration-500 hover:scale-[1.02]"
                 priority
               />
             </div>
@@ -84,7 +88,7 @@ export default function MakingTheAIMovePage() {
       {/* The Promise */}
       <section className="py-16 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-xl md:text-2xl text-[#1A1A2E] leading-relaxed font-medium">
+          <p className="animate-on-scroll text-xl md:text-2xl text-[#1A1A2E] leading-relaxed font-medium">
             {t.eventDetail.promise}
           </p>
         </div>
@@ -93,10 +97,10 @@ export default function MakingTheAIMovePage() {
       {/* What You'll Learn */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-[#1A1A2E] mb-12">
+          <h2 className="animate-on-scroll text-3xl font-bold text-[#1A1A2E] mb-12">
             {t.eventDetail.learnHeading}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 stagger-children">
             {[
               { title: t.eventDetail.mod1Title, desc: t.eventDetail.mod1Desc, num: "01" },
               { title: t.eventDetail.mod2Title, desc: t.eventDetail.mod2Desc, num: "02" },
@@ -107,7 +111,7 @@ export default function MakingTheAIMovePage() {
             ].map((mod) => (
               <div
                 key={mod.num}
-                className="bg-white rounded-xl p-6 border border-gray-200 hover:border-[#4DA2FF]/40 transition-colors"
+                className="animate-on-scroll card-hover bg-white rounded-xl p-6 border border-gray-200 hover:border-[#4DA2FF]/40"
               >
                 <div className="text-[#4DA2FF] text-sm font-mono font-bold mb-2">
                   {mod.num}
@@ -125,15 +129,15 @@ export default function MakingTheAIMovePage() {
       {/* Agenda */}
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-[#1A1A2E] mb-8">
+          <h2 className="animate-on-scroll text-3xl font-bold text-[#1A1A2E] mb-8">
             {t.eventDetail.agendaHeading}
           </h2>
-          <div className="flex gap-2 mb-8">
+          <div className="animate-on-scroll flex gap-2 mb-8">
             <button
               onClick={() => setActiveDay(1)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${
+              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                 activeDay === 1
-                  ? "bg-[#4DA2FF] text-white"
+                  ? "bg-[#4DA2FF] text-white shadow-lg shadow-[#4DA2FF]/25"
                   : "bg-gray-100 text-[#6B7280] hover:bg-gray-200"
               }`}
             >
@@ -141,9 +145,9 @@ export default function MakingTheAIMovePage() {
             </button>
             <button
               onClick={() => setActiveDay(2)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${
+              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                 activeDay === 2
-                  ? "bg-[#4DA2FF] text-white"
+                  ? "bg-[#4DA2FF] text-white shadow-lg shadow-[#4DA2FF]/25"
                   : "bg-gray-100 text-[#6B7280] hover:bg-gray-200"
               }`}
             >
@@ -153,8 +157,8 @@ export default function MakingTheAIMovePage() {
           <div className="space-y-0">
             {schedule.map((item, i) => (
               <div
-                key={i}
-                className={`flex gap-6 py-4 ${
+                key={`${activeDay}-${i}`}
+                className={`flex gap-6 py-4 transition-all duration-300 hover:bg-[#EBF4FF]/50 rounded-lg px-3 -mx-3 ${
                   i < schedule.length - 1 ? "border-b border-gray-100" : ""
                 }`}
               >
@@ -173,13 +177,13 @@ export default function MakingTheAIMovePage() {
       {/* Prerequisites */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-[#1A1A2E] mb-8">
+          <h2 className="animate-on-scroll text-3xl font-bold text-[#1A1A2E] mb-8">
             {t.eventDetail.prereqHeading}
           </h2>
-          <ul className="space-y-3 mb-8">
+          <ul className="space-y-3 mb-8 stagger-children">
             {prerequisites.map((item, i) => (
-              <li key={i} className="flex items-start gap-3">
-                <span className="text-[#00D4B4] mt-1 flex-shrink-0">
+              <li key={i} className="animate-on-scroll flex items-start gap-3 group">
+                <span className="text-[#00D4B4] mt-1 flex-shrink-0 transition-transform duration-300 group-hover:scale-110">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4" />
                   </svg>
@@ -190,7 +194,7 @@ export default function MakingTheAIMovePage() {
               </li>
             ))}
           </ul>
-          <p className="text-[#6B7280] text-sm bg-[#EBF4FF] rounded-lg p-4">
+          <p className="animate-on-scroll text-[#6B7280] text-sm bg-[#EBF4FF] rounded-lg p-4">
             {t.eventDetail.prereqNote}
           </p>
         </div>
@@ -199,10 +203,10 @@ export default function MakingTheAIMovePage() {
       {/* Location */}
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-[#1A1A2E] mb-6">
+          <h2 className="animate-on-scroll text-3xl font-bold text-[#1A1A2E] mb-6">
             {t.eventDetail.locationHeading}
           </h2>
-          <div className="bg-[#EBF4FF] rounded-2xl p-8">
+          <div className="animate-on-scroll bg-[#EBF4FF] rounded-2xl p-8">
             <h3 className="text-xl font-bold text-[#1A1A2E] mb-1">
               {t.eventDetail.locationName}
             </h3>
@@ -216,19 +220,21 @@ export default function MakingTheAIMovePage() {
       </section>
 
       {/* Register CTA */}
-      <section className="py-20 bg-[#0A1628]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+      <section className="py-20 bg-[#0A1628] relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#00D4B4]/5 rounded-full blur-3xl animate-pulse-glow pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+          <h2 className="animate-on-scroll text-3xl md:text-4xl font-bold text-white mb-4">
             {t.eventDetail.registerHeading}
           </h2>
-          <p className="text-gray-400 text-lg mb-8">
+          <p className="animate-on-scroll text-gray-400 text-lg mb-8">
             {t.eventDetail.registerBody}
           </p>
           <a
             href="https://luma.com/wha9jsu2"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block px-8 py-4 bg-[#00D4B4] hover:bg-[#00b89d] text-[#0A1628] font-bold rounded-lg transition-colors text-lg"
+            className="animate-on-scroll btn-shine inline-block px-8 py-4 bg-[#00D4B4] hover:bg-[#00b89d] text-[#0A1628] font-bold rounded-lg transition-all duration-300 text-lg hover:shadow-lg hover:shadow-[#00D4B4]/25 hover:-translate-y-0.5"
           >
             {t.eventDetail.registerCta}
           </a>

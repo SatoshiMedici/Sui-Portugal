@@ -29,7 +29,7 @@ export default function HeroSlideshow() {
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(next, 3000);
+    const interval = setInterval(next, 4000);
     return () => clearInterval(interval);
   }, [next]);
 
@@ -38,8 +38,11 @@ export default function HeroSlideshow() {
       {heroImages.map((src, i) => (
         <div
           key={src}
-          className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
-          style={{ opacity: i === current ? 1 : 0 }}
+          className="absolute inset-0 transition-all duration-[1500ms] ease-in-out"
+          style={{
+            opacity: i === current ? 1 : 0,
+            transform: i === current ? "scale(1)" : "scale(1.05)",
+          }}
         >
           <Image
             src={src}
@@ -51,8 +54,10 @@ export default function HeroSlideshow() {
           />
         </div>
       ))}
-      {/* Dark overlay for text readability */}
-      <div className="absolute inset-0 bg-[#0A1628]/40" />
+      {/* Gradient overlay for depth */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0A1628]/60 via-[#0A1628]/30 to-[#0A1628]/70" />
+      {/* Bottom fade into next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0A1628] to-transparent" />
     </div>
   );
 }

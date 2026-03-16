@@ -25,25 +25,25 @@ export default function Footer() {
           <div className="flex flex-col gap-2">
             <Link
               href="/"
-              className="text-gray-400 hover:text-white transition-colors text-sm"
+              className="text-gray-400 hover:text-white transition-all duration-300 text-sm hover:translate-x-1 inline-block"
             >
               {t.nav.home}
             </Link>
             <Link
               href="/events"
-              className="text-gray-400 hover:text-white transition-colors text-sm"
+              className="text-gray-400 hover:text-white transition-all duration-300 text-sm hover:translate-x-1 inline-block"
             >
               {t.nav.events}
             </Link>
             <Link
               href="/about"
-              className="text-gray-400 hover:text-white transition-colors text-sm"
+              className="text-gray-400 hover:text-white transition-all duration-300 text-sm hover:translate-x-1 inline-block"
             >
               {t.nav.about}
             </Link>
             <Link
               href="/community"
-              className="text-gray-400 hover:text-white transition-colors text-sm"
+              className="text-gray-400 hover:text-white transition-all duration-300 text-sm hover:translate-x-1 inline-block"
             >
               {t.nav.community}
             </Link>
@@ -54,7 +54,7 @@ export default function Footer() {
               href="https://t.me/suiportugal"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-[#4DA2FF] transition-colors"
+              className="text-gray-400 hover:text-[#4DA2FF] transition-all duration-300 hover:scale-110"
               aria-label="Telegram"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -65,7 +65,7 @@ export default function Footer() {
               href="https://x.com/suiportugal"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-[#4DA2FF] transition-colors"
+              className="text-gray-400 hover:text-[#4DA2FF] transition-all duration-300 hover:scale-110"
               aria-label="X / Twitter"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -76,7 +76,7 @@ export default function Footer() {
               href="https://luma.com/wha9jsu2"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-[#4DA2FF] transition-colors"
+              className="text-gray-400 hover:text-[#4DA2FF] transition-all duration-300 hover:scale-110"
               aria-label="Luma"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
