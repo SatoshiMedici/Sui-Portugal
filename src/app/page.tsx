@@ -20,15 +20,17 @@ export default function Home() {
         <HeroSlideshow />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <p className="animate-hero-text text-[#4DA2FF] font-medium text-sm tracking-wider uppercase mb-4">
+          <p className="animate-hero-text text-[#4DA2FF] font-medium text-sm tracking-wider uppercase mb-4" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.7)" }}>
             {t.hero.eyebrow}
           </p>
-          <h1 className="animate-hero-text-delay-1 text-4xl sm:text-5xl md:text-6xl font-bold text-white max-w-3xl leading-tight mb-6">
+          <h1 className="animate-hero-text-delay-1 text-4xl sm:text-5xl md:text-6xl font-bold text-white max-w-3xl leading-tight mb-6" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.8), 0 4px 24px rgba(0,0,0,0.5)" }}>
             {t.hero.headline}
           </h1>
-          <p className="animate-hero-text-delay-2 text-gray-300 text-lg md:text-xl max-w-2xl mb-10">
+          {t.hero.subheadline && (
+          <p className="animate-hero-text-delay-2 text-gray-300 text-lg md:text-xl max-w-2xl mb-10" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.7)" }}>
             {t.hero.subheadline}
           </p>
+          )}
           <div className="animate-hero-text-delay-3 flex flex-wrap gap-4">
             <a
               href="#event"

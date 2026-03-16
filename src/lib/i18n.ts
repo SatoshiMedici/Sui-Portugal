@@ -10,9 +10,8 @@ export const translations = {
     },
     hero: {
       eyebrow: "Sui Portugal",
-      headline: "Accelerating the adoption of Sui.",
-      subheadline:
-        "We run community and builder activations to support the growth of the Sui ecosystem.",
+      headline: "Accelerating the adoption of Sui. We run community and builder activations to support the growth of the Sui ecosystem.",
+      subheadline: "",
       cta: "See upcoming events →",
       ctaSecondary: "Join the community",
     },
@@ -143,9 +142,8 @@ export const translations = {
     },
     hero: {
       eyebrow: "Sui Portugal",
-      headline: "Acelerando a adoção da Sui.",
-      subheadline:
-        "Organizamos ativações comunitárias e de builders para apoiar o crescimento do ecossistema Sui.",
+      headline: "Acelerando a adoção da Sui. Organizamos ativações comunitárias e de builders para apoiar o crescimento do ecossistema Sui.",
+      subheadline: "",
       cta: "Ver próximos eventos →",
       ctaSecondary: "Entra na comunidade",
     },

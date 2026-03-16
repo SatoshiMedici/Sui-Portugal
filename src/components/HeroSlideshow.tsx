@@ -54,8 +54,7 @@ export default function HeroSlideshow() {
           />
         </div>
       ))}
-      {/* Gradient overlay for depth */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0A1628]/60 via-[#0A1628]/30 to-[#0A1628]/70" />
+      {/* Bottom fade only - no dark filter */}
       {/* Bottom fade into next section */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0A1628] to-transparent" />
     </div>
