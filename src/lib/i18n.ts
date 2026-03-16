@@ -59,7 +59,7 @@ export const translations = {
     },
     aboutShort: {
       heading: "Who we are",
-      body: "Sui Portugal is the Portuguese community for the Sui ecosystem. We bring together developers, builders, and crypto-curious people in Portugal to learn, build, and connect. We are part of a global network of Sui communities supported by the Sui Foundation.",
+      body: "Sui Portugal is a community-led initiative built by passionate members of the Sui ecosystem. We bring together developers, builders, and crypto-curious people to learn, build, and connect. We're part of a global network of Sui communities supported by the Sui Foundation.",
       link: "More about us →",
     },
     communityCta: {
@@ -192,7 +192,7 @@ export const translations = {
     },
     aboutShort: {
       heading: "Quem somos",
-      body: "Sui Portugal é a comunidade portuguesa do ecossistema Sui. Reunimos developers, builders e entusiastas de cripto em Portugal para aprender, construir e conectar. Fazemos parte de uma rede global de comunidades Sui apoiadas pela Sui Foundation.",
+      body: "Sui Portugal é uma iniciativa comunitária construída por membros apaixonados do ecossistema Sui. Reunimos developers, builders e curiosos de cripto para aprender, construir e conectar. Fazemos parte de uma rede global de comunidades Sui apoiadas pela Sui Foundation.",
       link: "Saber mais →",
     },
     communityCta: {
