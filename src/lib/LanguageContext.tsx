@@ -23,7 +23,8 @@ const LanguageContext = createContext<LanguageContextType>({
   setLocale: () => {},
 });
 
-const FADE_DURATION = 200;
+const FADE_DURATION = 150;
+const FADE_MIN_OPACITY = 0.6;
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>("en");
@@ -42,7 +43,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const setLocale = useCallback((l: Locale) => {
-    setOpacity(0);
+    setOpacity(FADE_MIN_OPACITY);
     setTimeout(() => {
       setLocaleState(l);
       localStorage.setItem("locale", l);
