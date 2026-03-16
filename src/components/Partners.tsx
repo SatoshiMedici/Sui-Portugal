@@ -10,10 +10,9 @@ interface Partner {
 }
 
 const partners: Partner[] = [
-  { name: "Sui Foundation" },
-  { name: "Mysten Labs" },
-  { name: "Kube Coworking" },
-  { name: "Anthropic" },
+  { name: "IPX", logo: "/images/partners/IPX.png" },
+  { name: "Scallop", logo: "/images/partners/Scallop.png" },
+  { name: "Winter Walrus", logo: "/images/partners/Winter.png" },
 ];
 
 export default function Partners() {
@@ -31,7 +30,7 @@ export default function Partners() {
           </h2>
         </div>
 
-        <div className="animate-on-scroll grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        <div className="animate-on-scroll grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
           {partners.map((partner) => {
             const inner = (
               <div className="group bg-white/[0.02] border border-white/[0.08] rounded-2xl p-6 sm:p-8 flex items-center justify-center aspect-[2/1] hover:border-[#298DFF]/20 hover:bg-[#298DFF]/[0.04] transition-all duration-300">
@@ -41,7 +40,7 @@ export default function Partners() {
                     alt={partner.name}
                     width={140}
                     height={48}
-                    className="max-h-10 sm:max-h-12 w-auto object-contain opacity-40 group-hover:opacity-70 transition-opacity duration-300 brightness-0 invert"
+                    className="max-h-10 sm:max-h-12 w-auto object-contain opacity-60 group-hover:opacity-100 transition-opacity duration-300"
                   />
                 ) : (
                   <span className="text-white/30 group-hover:text-white/60 transition-colors duration-300 text-sm sm:text-base font-semibold tracking-tight text-center leading-tight">
