@@ -91,7 +91,7 @@ export default function MakingTheAiMovePage() {
             </div>
             <div className="animate-fade-right flex justify-center">
               <Image
-                src="/images/events/making-the-ai-move.png"
+                src="/images/events/making-the-ai-move.webp"
                 alt="Sui Workshop — Making the AI Move"
                 width={480}
                 height={480}

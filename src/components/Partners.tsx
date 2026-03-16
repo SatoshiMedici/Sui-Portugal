@@ -10,9 +10,9 @@ interface Partner {
 }
 
 const partners: Partner[] = [
-  { name: "IPX", logo: "/images/partners/IPX.png" },
-  { name: "Scallop", logo: "/images/partners/Scallop.png" },
-  { name: "Winter Walrus", logo: "/images/partners/Winter.png" },
+  { name: "IPX", logo: "/images/partners/IPX.webp" },
+  { name: "Scallop", logo: "/images/partners/Scallop.webp" },
+  { name: "Winter Walrus", logo: "/images/partners/Winter.webp" },
 ];
 
 export default function Partners() {

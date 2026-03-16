@@ -97,7 +97,7 @@ export default function Home() {
                 </div>
                 <div className="animate-fade-right flex justify-center">
                   <Image
-                    src="/images/events/making-the-ai-move.png"
+                    src="/images/events/making-the-ai-move.webp"
                     alt="Sui Workshop — Making the AI Move"
                     width={480}
                     height={480}
@@ -144,7 +144,7 @@ export default function Home() {
                 {/* Logo card */}
                 <div className="col-span-2 bg-white/[0.02] border border-white/[0.08] rounded-2xl p-6 flex items-center gap-5 group hover:border-[#298DFF]/20 transition-all duration-300">
                   <Image
-                    src="/images/logo/SuiPortugal_Logo.png"
+                    src="/images/logo/SuiPortugal_Logo.webp"
                     alt="Sui Portugal"
                     width={56}
                     height={56}

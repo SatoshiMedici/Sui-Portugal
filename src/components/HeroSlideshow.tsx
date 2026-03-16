@@ -4,21 +4,21 @@ import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 
 const heroImages = [
-  "/images/hero/Hero-1.jpeg",
-  "/images/hero/Hero-2.jpg",
-  "/images/hero/Hero-3.jpg",
-  "/images/hero/Hero-4.jpg",
-  "/images/hero/Hero-5.jpg",
-  "/images/hero/Hero-6.jpg",
-  "/images/hero/Hero-7.jpg",
-  "/images/hero/Hero-8.jpg",
-  "/images/hero/Hero-9.jpg",
-  "/images/hero/Hero-10.jpg",
-  "/images/hero/Hero-11.jpeg",
-  "/images/hero/Hero-12.jpeg",
-  "/images/hero/Hero-13.jpeg",
-  "/images/hero/Hero-14.jpg",
-  "/images/hero/Hero-15.jpg",
+  "/images/hero/Hero-1.webp",
+  "/images/hero/Hero-2.webp",
+  "/images/hero/Hero-3.webp",
+  "/images/hero/Hero-4.webp",
+  "/images/hero/Hero-5.webp",
+  "/images/hero/Hero-6.webp",
+  "/images/hero/Hero-7.webp",
+  "/images/hero/Hero-8.webp",
+  "/images/hero/Hero-9.webp",
+  "/images/hero/Hero-10.webp",
+  "/images/hero/Hero-11.webp",
+  "/images/hero/Hero-12.webp",
+  "/images/hero/Hero-13.webp",
+  "/images/hero/Hero-14.webp",
+  "/images/hero/Hero-15.webp",
 ];
 
 export default function HeroSlideshow() {

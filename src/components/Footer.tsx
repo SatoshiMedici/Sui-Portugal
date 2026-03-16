@@ -15,7 +15,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2.5 mb-4">
               <Image
-                src="/images/logo/SuiPortugal_Logo.png"
+                src="/images/logo/SuiPortugal_Logo.webp"
                 alt="Sui Portugal"
                 width={28}
                 height={28}
