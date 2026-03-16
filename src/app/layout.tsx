@@ -33,7 +33,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>
+      <body className="bg-black text-white">
         <LanguageProvider>
           <Navbar />
           <main className="pt-16">{children}</main>

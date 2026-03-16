@@ -54,9 +54,10 @@ export default function HeroSlideshow() {
           />
         </div>
       ))}
-      {/* Bottom fade only - no dark filter */}
-      {/* Bottom fade into next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0A1628] to-transparent" />
+      {/* Dark overlay for text readability */}
+      <div className="absolute inset-0 bg-black/50" />
+      {/* Bottom fade into black */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black to-transparent" />
     </div>
   );
 }

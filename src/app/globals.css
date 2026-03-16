@@ -13,6 +13,17 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #000;
+  color: #fff;
+}
+
+/* ── Hide scrollbar (Sui.io style) ── */
+::-webkit-scrollbar {
+  display: none;
+}
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* ── Scroll-triggered animations ── */
@@ -103,18 +114,28 @@ body {
   animation: hero-text-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
 }
 
-/* ── Card hover enhancements ── */
+/* ── Card hover enhancements (Sui.io style) ── */
 .card-hover {
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.3s ease;
+              border-color 0.3s ease,
+              background-color 0.3s ease;
 }
 .card-hover:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 40px -12px rgba(77, 162, 255, 0.2);
+  box-shadow: 0 12px 40px -12px rgba(41, 141, 255, 0.15);
+  background-color: rgba(41, 141, 255, 0.08);
 }
 
-/* ── Button shine effect ── */
+/* ── Arrow hover animation (Sui.io style) ── */
+.arrow-hover .arrow-icon {
+  transition: transform 0.3s ease;
+}
+.arrow-hover:hover .arrow-icon {
+  transform: translateX(4px);
+}
+
+/* ── Button styles (Sui.io style) ── */
 .btn-shine {
   position: relative;
   overflow: hidden;
@@ -129,7 +150,7 @@ body {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.12),
     transparent
   );
   transform: skewX(-20deg);
@@ -139,9 +160,24 @@ body {
   left: 125%;
 }
 
+/* ── Dotted line separator (Sui.io style) ── */
+.dotted-separator {
+  border: none;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+}
+
+/* ── Monospace label (Sui.io style) ── */
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
 /* ── Glow accents ── */
 .glow-blue {
-  box-shadow: 0 0 40px -8px rgba(77, 162, 255, 0.3);
+  box-shadow: 0 0 40px -8px rgba(41, 141, 255, 0.3);
 }
 .glow-teal {
   box-shadow: 0 0 40px -8px rgba(0, 212, 180, 0.3);
@@ -149,9 +185,9 @@ body {
 
 /* ── Navbar scroll effect ── */
 .navbar-scrolled {
-  background: rgba(10, 22, 40, 0.98) !important;
+  background: rgba(0, 0, 0, 0.95) !important;
   backdrop-filter: blur(16px) saturate(180%);
-  box-shadow: 0 1px 24px -4px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.08);
 }
 
 /* ── Section dividers ── */
@@ -165,7 +201,7 @@ body {
   left: 0;
   right: 0;
   height: 80px;
-  background: linear-gradient(to bottom, #0A1628, transparent);
+  background: linear-gradient(to bottom, #000, transparent);
   pointer-events: none;
   z-index: 1;
 }

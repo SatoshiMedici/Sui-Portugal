@@ -16,30 +16,30 @@ export default function Navbar() {
   }, []);
 
   const navLinkClass =
-    "text-gray-300 hover:text-white transition-colors duration-300 text-sm relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-[#4DA2FF] after:transition-all after:duration-300 hover:after:w-full";
+    "text-white/60 hover:text-white transition-colors duration-300 text-sm tracking-wide relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-[#298DFF] after:transition-all after:duration-300 hover:after:w-full";
 
   const mobileLinkClass =
-    "block text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-300";
+    "block text-white/60 hover:text-white hover:translate-x-1 transition-all duration-300";
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
           ? "navbar-scrolled"
-          : "bg-[#0A1628]/80 backdrop-blur-sm"
-      } border-b border-white/10`}
+          : "bg-black/60 backdrop-blur-sm"
+      } border-b border-white/[0.08]`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-10">
         <div className="flex items-center justify-between h-16">
-          <a href="#home" className="flex items-center gap-2 group">
+          <a href="#home" className="flex items-center gap-2.5 group">
             <Image
               src="/images/logo/SuiPortugal_Logo.png"
               alt="Sui Portugal"
-              width={32}
-              height={32}
+              width={28}
+              height={28}
               className="rounded-full transition-transform duration-300 group-hover:scale-110"
             />
-            <span className="text-white font-bold text-lg">Sui Portugal</span>
+            <span className="text-white font-semibold tracking-tight">Sui Portugal</span>
           </a>
 
           <div className="hidden md:flex items-center gap-8">
@@ -50,23 +50,23 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="flex items-center bg-white/10 rounded-full text-sm">
+            <div className="flex items-center bg-white/[0.06] rounded-full text-xs border border-white/[0.08]">
               <button
                 onClick={() => setLocale("en")}
-                className={`px-3 py-1 rounded-full transition-all duration-300 ${
+                className={`px-3 py-1.5 rounded-full transition-all duration-300 ${
                   locale === "en"
-                    ? "bg-[#4DA2FF] text-white shadow-lg shadow-[#4DA2FF]/25"
-                    : "text-gray-400 hover:text-white"
+                    ? "bg-[#298DFF] text-white"
+                    : "text-white/40 hover:text-white"
                 }`}
               >
                 EN
               </button>
               <button
                 onClick={() => setLocale("pt")}
-                className={`px-3 py-1 rounded-full transition-all duration-300 ${
+                className={`px-3 py-1.5 rounded-full transition-all duration-300 ${
                   locale === "pt"
-                    ? "bg-[#4DA2FF] text-white shadow-lg shadow-[#4DA2FF]/25"
-                    : "text-gray-400 hover:text-white"
+                    ? "bg-[#298DFF] text-white"
+                    : "text-white/40 hover:text-white"
                 }`}
               >
                 PT
@@ -89,14 +89,14 @@ export default function Navbar() {
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    strokeWidth={2}
+                    strokeWidth={1.5}
                     d="M6 18L18 6M6 6l12 12"
                   />
                 ) : (
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    strokeWidth={2}
+                    strokeWidth={1.5}
                     d="M4 6h16M4 12h16M4 18h16"
                   />
                 )}
@@ -111,8 +111,8 @@ export default function Navbar() {
           menuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="bg-[#0A1628]/98 backdrop-blur-md border-t border-white/10">
-          <div className="px-4 py-4 space-y-3">
+        <div className="bg-black/95 backdrop-blur-md border-t border-white/[0.08]">
+          <div className="px-6 py-4 space-y-3">
             <a href="#home" onClick={() => setMenuOpen(false)} className={mobileLinkClass}>{t.nav.home}</a>
             <a href="#event" onClick={() => setMenuOpen(false)} className={mobileLinkClass}>{t.nav.events}</a>
             <a href="#about" onClick={() => setMenuOpen(false)} className={mobileLinkClass}>{t.nav.about}</a>

@@ -40,7 +40,7 @@ function VideoCard({ videoId, title, description, isUnmuted, onToggleSound }: Vi
   }, [isUnmuted, postCommand]);
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden bg-black">
       {/* Scale up to crop YouTube title/watermark area */}
       <div className="relative w-full aspect-video overflow-hidden">
         <iframe
@@ -60,14 +60,14 @@ function VideoCard({ videoId, title, description, isUnmuted, onToggleSound }: Vi
       {/* Opaque strip at top to cover any YouTube title that briefly appears */}
       <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/80 to-transparent pointer-events-none" />
       {/* Title and description overlay at bottom */}
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent pointer-events-none px-5 pb-5 pt-12">
-        <h3 className="text-white text-lg font-semibold">{title}</h3>
-        <p className="text-white/80 text-sm mt-1 leading-relaxed">{description}</p>
+      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/70 to-transparent pointer-events-none px-6 pb-6 pt-16">
+        <h3 className="text-white text-lg font-semibold tracking-tight">{title}</h3>
+        <p className="text-white/60 text-sm mt-1.5 leading-relaxed">{description}</p>
       </div>
       {/* Sound toggle button */}
       <button
         onClick={onToggleSound}
-        className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center transition-colors"
+        className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/[0.08] hover:bg-white/[0.15] border border-white/[0.1] flex items-center justify-center transition-colors"
         aria-label={isUnmuted ? "Mute video" : "Unmute video"}
       >
         {!isUnmuted ? (
@@ -116,18 +116,23 @@ export default function WhatWeDoCards() {
   };
 
   return (
-    <section className="py-20 bg-white overflow-hidden">
-      <h2 className="animate-on-scroll text-3xl font-bold text-[#1A1A2E] text-center mb-12 px-4">
-        {t.whatWeDo.heading}
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2">
-          <VideoCard
-            videoId="aCwi8uXMA8A"
-            title={t.whatWeDo.card2Title}
-            description={t.whatWeDo.card2Body}
-            isUnmuted={activeVideo === "video1"}
-            onToggleSound={() => toggleVideo("video1")}
-          />
+    <section className="py-24 bg-black overflow-hidden">
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-10 mb-12">
+        <span className="mono-label text-[#298DFF] mb-4 block">Community</span>
+        <h2 className="animate-on-scroll text-3xl md:text-5xl font-bold text-white tracking-tight">
+          {t.whatWeDo.heading}
+        </h2>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 border-t border-white/[0.08]">
+          <div className="border-b md:border-b-0 md:border-r border-white/[0.08]">
+            <VideoCard
+              videoId="aCwi8uXMA8A"
+              title={t.whatWeDo.card2Title}
+              description={t.whatWeDo.card2Body}
+              isUnmuted={activeVideo === "video1"}
+              onToggleSound={() => toggleVideo("video1")}
+            />
+          </div>
           <VideoCard
             videoId="GE-LTKNCBtA"
             title={t.whatWeDo.card3Title}
