@@ -10,6 +10,7 @@ import HeroSlideshow from "@/components/HeroSlideshow";
 import StatsBar from "@/components/StatsBar";
 import EcosystemTicker from "@/components/EcosystemTicker";
 import GridPattern from "@/components/GridPattern";
+import Partners from "@/components/Partners";
 import { useScrollAnimations } from "@/hooks/useInView";
 
 export default function Home() {
@@ -114,6 +115,12 @@ export default function Home() {
 
       {/* ─── What We Do ─── */}
       <WhatWeDoCards />
+
+      {/* ─── Dotted separator ─── */}
+      <hr className="dotted-separator max-w-[1400px] mx-auto" />
+
+      {/* ─── Partners ─── */}
+      <Partners />
 
       {/* ─── Dotted separator ─── */}
       <hr className="dotted-separator max-w-[1400px] mx-auto" />
