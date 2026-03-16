@@ -16,7 +16,9 @@ export default function CommunityCTA() {
         </p>
         <div className="flex justify-center gap-4 flex-wrap">
           <a
-            href="#"
+            href="https://t.me/suiportugal"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/15 text-white rounded-lg transition-colors border border-white/10"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -25,7 +27,9 @@ export default function CommunityCTA() {
             Telegram
           </a>
           <a
-            href="#"
+            href="https://x.com/suiportugal"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/15 text-white rounded-lg transition-colors border border-white/10"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -34,7 +38,9 @@ export default function CommunityCTA() {
             X / Twitter
           </a>
           <a
-            href="#"
+            href="https://luma.com/wha9jsu2"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/15 text-white rounded-lg transition-colors border border-white/10"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">

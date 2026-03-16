@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useLanguage } from "@/lib/LanguageContext";
+import { CalendarIcon, LocationIcon, PeopleIcon, FreeIcon } from "@/components/Icons";
 import EventCard from "@/components/EventCard";
 import WhatWeDoCards from "@/components/WhatWeDoCards";
 import CommunityCTA from "@/components/CommunityCTA";
@@ -64,10 +65,10 @@ export default function Home() {
                   {t.featuredEvent.description}
                 </p>
                 <div className="flex flex-wrap gap-6 text-sm text-gray-400 mb-8">
-                  <span>📅 {t.featuredEvent.dateDetail}</span>
-                  <span>📍 {t.featuredEvent.locationDetail}</span>
-                  <span>👥 {t.featuredEvent.spots}</span>
-                  <span>🆓 {t.featuredEvent.price}</span>
+                  <span className="flex items-center gap-1.5"><CalendarIcon /> {t.featuredEvent.dateDetail}</span>
+                  <span className="flex items-center gap-1.5"><LocationIcon /> {t.featuredEvent.locationDetail}</span>
+                  <span className="flex items-center gap-1.5"><PeopleIcon /> {t.featuredEvent.spots}</span>
+                  <span className="flex items-center gap-1.5"><FreeIcon /> {t.featuredEvent.price}</span>
                 </div>
                 <Link
                   href="/events/making-the-ai-move"

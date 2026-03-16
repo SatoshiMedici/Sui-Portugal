@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useLanguage } from "@/lib/LanguageContext";
+import { CalendarIcon, LocationIcon, PeopleIcon, FreeIcon } from "@/components/Icons";
 
 const day1Schedule = [
   { time: "11:00 – 11:15", en: "Arrival, coffee, toolchain check", pt: "Chegada, café, verificação de ferramentas" },
@@ -52,10 +53,10 @@ export default function MakingTheAIMovePage() {
                 {t.eventDetail.subtitle}
               </p>
               <div className="flex flex-wrap gap-6 text-gray-400 mb-8">
-                <span>📅 {t.featuredEvent.dateDetail}</span>
-                <span>📍 {t.featuredEvent.locationDetail}</span>
-                <span>👥 {t.featuredEvent.spots}</span>
-                <span>🆓 {t.featuredEvent.price}</span>
+                <span className="flex items-center gap-1.5"><CalendarIcon /> {t.featuredEvent.dateDetail}</span>
+                <span className="flex items-center gap-1.5"><LocationIcon /> {t.featuredEvent.locationDetail}</span>
+                <span className="flex items-center gap-1.5"><PeopleIcon /> {t.featuredEvent.spots}</span>
+                <span className="flex items-center gap-1.5"><FreeIcon /> {t.featuredEvent.price}</span>
               </div>
               <a
                 href="https://luma.com/wha9jsu2"
@@ -208,7 +209,7 @@ export default function MakingTheAIMovePage() {
             <p className="text-[#6B7280] mb-4">{t.eventDetail.locationCity}</p>
             <p className="text-[#1A1A2E]">{t.eventDetail.locationDesc}</p>
             <div className="mt-6 bg-gray-200 rounded-xl h-48 flex items-center justify-center text-[#6B7280]">
-              <span className="text-sm">📍 Map embed placeholder</span>
+              <span className="text-sm flex items-center gap-1.5"><LocationIcon /> Map embed placeholder</span>
             </div>
           </div>
         </div>

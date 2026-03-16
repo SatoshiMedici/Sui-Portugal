@@ -51,7 +51,9 @@ export default function Footer() {
 
           <div className="flex gap-4">
             <a
-              href="#"
+              href="https://t.me/suiportugal"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-gray-400 hover:text-[#4DA2FF] transition-colors"
               aria-label="Telegram"
             >
@@ -60,7 +62,9 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              href="#"
+              href="https://x.com/suiportugal"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-gray-400 hover:text-[#4DA2FF] transition-colors"
               aria-label="X / Twitter"
             >
@@ -69,7 +73,9 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              href="#"
+              href="https://luma.com/wha9jsu2"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-gray-400 hover:text-[#4DA2FF] transition-colors"
               aria-label="Luma"
             >

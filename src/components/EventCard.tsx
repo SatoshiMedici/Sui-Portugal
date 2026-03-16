@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { CalendarIcon, LocationIcon } from "@/components/Icons";
 
 interface EventCardProps {
   name: string;
@@ -41,11 +42,11 @@ export default function EventCard({
               {name}
             </h3>
             <div className="flex flex-wrap gap-4 text-sm text-gray-400 mb-4">
-              <span className="flex items-center gap-1">
-                <span>📅</span> {date}
+              <span className="flex items-center gap-1.5">
+                <CalendarIcon /> {date}
               </span>
-              <span className="flex items-center gap-1">
-                <span>📍</span> {location}
+              <span className="flex items-center gap-1.5">
+                <LocationIcon /> {location}
               </span>
             </div>
             <p className="text-gray-300 text-base max-w-xl">{description}</p>
@@ -74,8 +75,8 @@ export default function EventCard({
         {name}
       </h3>
       <div className="flex flex-wrap gap-3 text-sm text-[#6B7280] mb-3">
-        <span>📅 {date}</span>
-        <span>📍 {location}</span>
+        <span className="flex items-center gap-1.5"><CalendarIcon /> {date}</span>
+        <span className="flex items-center gap-1.5"><LocationIcon /> {location}</span>
       </div>
       <p className="text-[#6B7280] text-sm mb-4">{description}</p>
       <Link
