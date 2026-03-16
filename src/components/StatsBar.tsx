@@ -56,9 +56,9 @@ function AnimatedStat({ value, suffix, label }: StatProps) {
 
 export default function StatsBar() {
   const stats = [
-    { value: 200, suffix: "+", label: "Community Members" },
-    { value: 5, suffix: "+", label: "Events Hosted" },
-    { value: 50, suffix: "+", label: "Builders Activated" },
+    { value: 1000, suffix: "+", label: "Community Members" },
+    { value: 21, suffix: "", label: "Events" },
+    { value: 100, suffix: "+", label: "Builders Activated" },
     { value: 2, suffix: "", label: "Cities" },
   ];
 
