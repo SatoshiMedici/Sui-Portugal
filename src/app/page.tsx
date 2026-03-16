@@ -111,7 +111,7 @@ export default function Home() {
               <div className="w-full max-w-sm aspect-square bg-gradient-to-br from-[#4DA2FF]/10 to-[#00D4B4]/10 rounded-2xl flex items-center justify-center border border-[#4DA2FF]/20 animate-float">
                 <div className="text-center">
                   <Image
-                    src="/images/sui-portugal-icon.svg"
+                    src="/images/logo/SuiPortugal_Logo.png"
                     alt="Sui Portugal"
                     width={80}
                     height={80}

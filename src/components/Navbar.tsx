@@ -33,7 +33,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           <a href="#home" className="flex items-center gap-2 group">
             <Image
-              src="/images/sui-portugal-icon.svg"
+              src="/images/logo/SuiPortugal_Logo.png"
               alt="Sui Portugal"
               width={32}
               height={32}

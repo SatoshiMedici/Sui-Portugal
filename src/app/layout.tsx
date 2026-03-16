@@ -9,8 +9,8 @@ export const metadata: Metadata = {
   description:
     "Developer workshops, community events, and builder activations for the Portuguese Sui ecosystem.",
   icons: {
-    icon: "/images/sui-portugal-icon.svg",
-    apple: "/images/sui-portugal-icon.svg",
+    icon: "/images/logo/SuiPortugal_Logo.png",
+    apple: "/images/logo/SuiPortugal_Logo.png",
   },
 };
 
