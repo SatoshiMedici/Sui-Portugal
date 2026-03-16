@@ -1,11 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useLanguage } from "@/lib/LanguageContext";
 
 export default function Footer() {
   const { t } = useLanguage();
-
-  const linkClass = "text-gray-400 hover:text-white transition-all duration-300 text-sm hover:translate-x-1 inline-block";
 
   return (
     <footer className="bg-[#0A1628] border-t border-white/10">
@@ -24,10 +23,30 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <a href="#home" className={linkClass}>{t.nav.home}</a>
-            <a href="#event" className={linkClass}>{t.nav.events}</a>
-            <a href="#about" className={linkClass}>{t.nav.about}</a>
-            <a href="#community" className={linkClass}>{t.nav.community}</a>
+            <Link
+              href="/"
+              className="text-gray-400 hover:text-white transition-all duration-300 text-sm hover:translate-x-1 inline-block"
+            >
+              {t.nav.home}
+            </Link>
+            <Link
+              href="/events"
+              className="text-gray-400 hover:text-white transition-all duration-300 text-sm hover:translate-x-1 inline-block"
+            >
+              {t.nav.events}
+            </Link>
+            <Link
+              href="/about"
+              className="text-gray-400 hover:text-white transition-all duration-300 text-sm hover:translate-x-1 inline-block"
+            >
+              {t.nav.about}
+            </Link>
+            <Link
+              href="/community"
+              className="text-gray-400 hover:text-white transition-all duration-300 text-sm hover:translate-x-1 inline-block"
+            >
+              {t.nav.community}
+            </Link>
           </div>
 
           <div className="flex gap-4">

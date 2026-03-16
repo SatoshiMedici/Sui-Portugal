@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/lib/LanguageContext";
 
@@ -14,12 +15,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const navLinkClass =
-    "text-gray-300 hover:text-white transition-colors duration-300 text-sm relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-[#4DA2FF] after:transition-all after:duration-300 hover:after:w-full";
-
-  const mobileLinkClass =
-    "block text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-300";
-
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
@@ -30,18 +25,38 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <a href="#home" className="flex items-center gap-2 group">
+          <Link href="/" className="flex items-center gap-2 group">
             <div className="w-8 h-8 rounded-lg bg-[#4DA2FF] flex items-center justify-center font-bold text-white text-sm transition-transform duration-300 group-hover:scale-110">
               S
             </div>
             <span className="text-white font-bold text-lg">Sui Portugal</span>
-          </a>
+          </Link>
 
           <div className="hidden md:flex items-center gap-8">
-            <a href="#home" className={navLinkClass}>{t.nav.home}</a>
-            <a href="#event" className={navLinkClass}>{t.nav.events}</a>
-            <a href="#about" className={navLinkClass}>{t.nav.about}</a>
-            <a href="#community" className={navLinkClass}>{t.nav.community}</a>
+            <Link
+              href="/"
+              className="text-gray-300 hover:text-white transition-colors duration-300 text-sm relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-[#4DA2FF] after:transition-all after:duration-300 hover:after:w-full"
+            >
+              {t.nav.home}
+            </Link>
+            <Link
+              href="/events"
+              className="text-gray-300 hover:text-white transition-colors duration-300 text-sm relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-[#4DA2FF] after:transition-all after:duration-300 hover:after:w-full"
+            >
+              {t.nav.events}
+            </Link>
+            <Link
+              href="/about"
+              className="text-gray-300 hover:text-white transition-colors duration-300 text-sm relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-[#4DA2FF] after:transition-all after:duration-300 hover:after:w-full"
+            >
+              {t.nav.about}
+            </Link>
+            <Link
+              href="/community"
+              className="text-gray-300 hover:text-white transition-colors duration-300 text-sm relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-[#4DA2FF] after:transition-all after:duration-300 hover:after:w-full"
+            >
+              {t.nav.community}
+            </Link>
           </div>
 
           <div className="flex items-center gap-4">
@@ -108,10 +123,34 @@ export default function Navbar() {
       >
         <div className="bg-[#0A1628]/98 backdrop-blur-md border-t border-white/10">
           <div className="px-4 py-4 space-y-3">
-            <a href="#home" onClick={() => setMenuOpen(false)} className={mobileLinkClass}>{t.nav.home}</a>
-            <a href="#event" onClick={() => setMenuOpen(false)} className={mobileLinkClass}>{t.nav.events}</a>
-            <a href="#about" onClick={() => setMenuOpen(false)} className={mobileLinkClass}>{t.nav.about}</a>
-            <a href="#community" onClick={() => setMenuOpen(false)} className={mobileLinkClass}>{t.nav.community}</a>
+            <Link
+              href="/"
+              onClick={() => setMenuOpen(false)}
+              className="block text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-300"
+            >
+              {t.nav.home}
+            </Link>
+            <Link
+              href="/events"
+              onClick={() => setMenuOpen(false)}
+              className="block text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-300"
+            >
+              {t.nav.events}
+            </Link>
+            <Link
+              href="/about"
+              onClick={() => setMenuOpen(false)}
+              className="block text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-300"
+            >
+              {t.nav.about}
+            </Link>
+            <Link
+              href="/community"
+              onClick={() => setMenuOpen(false)}
+              className="block text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-300"
+            >
+              {t.nav.community}
+            </Link>
           </div>
         </div>
       </div>
