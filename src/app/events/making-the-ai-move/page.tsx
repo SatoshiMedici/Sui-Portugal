@@ -58,7 +58,7 @@ export default function MakingTheAIMovePage() {
                 <span>🆓 {t.featuredEvent.price}</span>
               </div>
               <a
-                href="#"
+                href="https://luma.com/wha9jsu2"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block px-8 py-4 bg-[#00D4B4] hover:bg-[#00b89d] text-[#0A1628] font-bold rounded-lg transition-colors text-lg"
@@ -224,7 +224,7 @@ export default function MakingTheAIMovePage() {
             {t.eventDetail.registerBody}
           </p>
           <a
-            href="#"
+            href="https://luma.com/wha9jsu2"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-8 py-4 bg-[#00D4B4] hover:bg-[#00b89d] text-[#0A1628] font-bold rounded-lg transition-colors text-lg"
