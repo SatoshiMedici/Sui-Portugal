@@ -27,7 +27,7 @@ export default function Home() {
             {t.hero.headline}
           </h1>
           {t.hero.subheadline && (
-          <p className="animate-hero-text-delay-2 text-gray-300 text-lg md:text-xl max-w-2xl mb-10" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.7)" }}>
+          <p className="animate-hero-text-delay-2 text-gray-100 text-lg md:text-xl max-w-2xl mb-10" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.7)" }}>
             {t.hero.subheadline}
           </p>
           )}

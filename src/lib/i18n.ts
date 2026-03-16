@@ -10,7 +10,7 @@ export const translations = {
     },
     hero: {
       eyebrow: "Sui Portugal",
-      headline: "Accelerating the adoption of Sui.",
+      headline: "Accelerating Sui Adoption",
       subheadline: "We run community and builder activations to support the growth of the Sui ecosystem.",
       cta: "See upcoming events →",
       ctaSecondary: "Join the community",
@@ -142,7 +142,7 @@ export const translations = {
     },
     hero: {
       eyebrow: "Sui Portugal",
-      headline: "Acelerando a adoção da Sui.",
+      headline: "Acelerando a Adoção da Sui",
       subheadline: "Organizamos ativações comunitárias e de builders para apoiar o crescimento do ecossistema Sui.",
       cta: "Ver próximos eventos →",
       ctaSecondary: "Entra na comunidade",
