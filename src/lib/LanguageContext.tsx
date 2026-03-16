@@ -5,6 +5,8 @@ import {
   useContext,
   useState,
   useEffect,
+  useRef,
+  useCallback,
   type ReactNode,
 } from "react";
 import { translations, type Locale, type Translations } from "./i18n";
@@ -21,8 +23,12 @@ const LanguageContext = createContext<LanguageContextType>({
   setLocale: () => {},
 });
 
+const FADE_DURATION = 200;
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>("en");
+  const [opacity, setOpacity] = useState(1);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const browserLang = navigator.language;
@@ -35,16 +41,28 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const setLocale = (l: Locale) => {
-    setLocaleState(l);
-    localStorage.setItem("locale", l);
-  };
+  const setLocale = useCallback((l: Locale) => {
+    setOpacity(0);
+    setTimeout(() => {
+      setLocaleState(l);
+      localStorage.setItem("locale", l);
+      setOpacity(1);
+    }, FADE_DURATION);
+  }, []);
 
   return (
     <LanguageContext.Provider
       value={{ locale, t: translations[locale], setLocale }}
     >
-      {children}
+      <div
+        ref={wrapperRef}
+        style={{
+          opacity,
+          transition: `opacity ${FADE_DURATION}ms ease-in-out`,
+        }}
+      >
+        {children}
+      </div>
     </LanguageContext.Provider>
   );
 }

@@ -50,23 +50,28 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="flex items-center bg-white/[0.06] rounded-full text-xs border border-white/[0.08]">
+            <div className="relative flex items-center bg-white/[0.06] rounded-full text-xs border border-white/[0.08]">
+              {/* Sliding indicator */}
+              <div
+                className="absolute top-0.5 bottom-0.5 w-[calc(50%-2px)] rounded-full bg-[#298DFF] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-[0_0_12px_rgba(41,141,255,0.4)]"
+                style={{ left: locale === "en" ? "2px" : "calc(50% + 0px)" }}
+              />
               <button
                 onClick={() => setLocale("en")}
-                className={`px-3 py-1.5 rounded-full transition-all duration-300 ${
+                className={`relative z-10 px-3 py-1.5 rounded-full transition-colors duration-300 ${
                   locale === "en"
-                    ? "bg-[#298DFF] text-white"
-                    : "text-white/40 hover:text-white"
+                    ? "text-white"
+                    : "text-white/40 hover:text-white/70"
                 }`}
               >
                 EN
               </button>
               <button
                 onClick={() => setLocale("pt")}
-                className={`px-3 py-1.5 rounded-full transition-all duration-300 ${
+                className={`relative z-10 px-3 py-1.5 rounded-full transition-colors duration-300 ${
                   locale === "pt"
-                    ? "bg-[#298DFF] text-white"
-                    : "text-white/40 hover:text-white"
+                    ? "text-white"
+                    : "text-white/40 hover:text-white/70"
                 }`}
               >
                 PT
