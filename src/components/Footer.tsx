@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useLanguage } from "@/lib/LanguageContext";
 
 export default function Footer() {
@@ -13,9 +14,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-8 h-8 rounded-lg bg-[#4DA2FF] flex items-center justify-center font-bold text-white text-sm">
-                S
-              </div>
+              <Image
+                src="/images/sui-portugal-icon.svg"
+                alt="Sui Portugal"
+                width={32}
+                height={32}
+                className="rounded-full"
+              />
               <span className="text-white font-bold text-lg">
                 Sui Portugal
               </span>

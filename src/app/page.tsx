@@ -110,9 +110,13 @@ export default function Home() {
             <div className="animate-fade-right flex justify-center">
               <div className="w-full max-w-sm aspect-square bg-gradient-to-br from-[#4DA2FF]/10 to-[#00D4B4]/10 rounded-2xl flex items-center justify-center border border-[#4DA2FF]/20 animate-float">
                 <div className="text-center">
-                  <div className="w-20 h-20 rounded-2xl bg-[#4DA2FF] flex items-center justify-center font-bold text-white text-3xl mx-auto mb-4 shadow-lg shadow-[#4DA2FF]/30">
-                    S
-                  </div>
+                  <Image
+                    src="/images/sui-portugal-icon.svg"
+                    alt="Sui Portugal"
+                    width={80}
+                    height={80}
+                    className="rounded-full mx-auto mb-4 shadow-lg shadow-[#4DA2FF]/30"
+                  />
                   <p className="text-[#4DA2FF] font-bold text-xl">
                     Sui Portugal
                   </p>

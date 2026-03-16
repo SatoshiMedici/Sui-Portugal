@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Circle background - Portuguese flag -->
+  <clipPath id="circle">
+    <circle cx="100" cy="100" r="96"/>
+  </clipPath>
+  <g clip-path="url(#circle)">
+    <!-- Green (left side) -->
+    <rect x="0" y="0" width="90" height="200" fill="#006600"/>
+    <!-- Red (right side) -->
+    <rect x="90" y="0" width="110" height="200" fill="#CC0000"/>
+  </g>
+  <!-- Circle border -->
+  <circle cx="100" cy="100" r="96" fill="none" stroke="#CC0000" stroke-width="2"/>
+
+  <!-- Shield (white outline) -->
+  <path d="M100 60 C75 60, 62 72, 62 90 C62 118, 100 145, 100 145 C100 145, 138 118, 138 90 C138 72, 125 60, 100 60 Z" fill="white"/>
+
+  <!-- Shield inner (yellow) -->
+  <path d="M100 66 C79 66, 68 76, 68 92 C68 116, 100 139, 100 139 C100 139, 132 116, 132 92 C132 76, 121 66, 100 66 Z" fill="#FFD700"/>
+
+  <!-- Sui-inspired blue squares (2x2 grid + 1 bottom) -->
+  <rect x="82" y="82" width="14" height="11" rx="2" fill="#1A3FB5"/>
+  <rect x="104" y="82" width="14" height="11" rx="2" fill="#1A3FB5"/>
+  <rect x="82" y="100" width="14" height="11" rx="2" fill="#1A3FB5"/>
+  <rect x="104" y="100" width="14" height="11" rx="2" fill="#1A3FB5"/>
+</svg>

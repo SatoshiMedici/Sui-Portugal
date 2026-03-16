@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   title: "Sui Portugal — Building the Sui ecosystem in Portugal",
   description:
     "Developer workshops, community events, and builder activations for the Portuguese Sui ecosystem.",
+  icons: {
+    icon: "/images/sui-portugal-icon.svg",
+    apple: "/images/sui-portugal-icon.svg",
+  },
 };
 
 export default function RootLayout({
