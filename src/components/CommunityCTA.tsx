@@ -1,6 +1,7 @@
 "use client";
 
 import { useLanguage } from "@/lib/LanguageContext";
+import NetworkGrid from "@/components/NetworkGrid";
 
 export default function CommunityCTA() {
   const { t } = useLanguage();
@@ -10,6 +11,7 @@ export default function CommunityCTA() {
 
   return (
     <section className="py-24 bg-black relative overflow-hidden">
+      <NetworkGrid className="inset-0" />
       {/* Background glow */}
       <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-[#298DFF]/[0.03] rounded-full blur-3xl animate-pulse-glow pointer-events-none" />
 

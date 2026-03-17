@@ -9,7 +9,7 @@ import CommunityCTA from "@/components/CommunityCTA";
 import HeroSlideshow from "@/components/HeroSlideshow";
 import StatsBar from "@/components/StatsBar";
 import EcosystemTicker from "@/components/EcosystemTicker";
-import GridPattern from "@/components/GridPattern";
+import NetworkGrid from "@/components/NetworkGrid";
 import Partners from "@/components/Partners";
 import { useScrollAnimations } from "@/hooks/useInView";
 
@@ -64,7 +64,7 @@ export default function Home() {
 
       {/* ─── Featured Event ─── */}
       <section id="event" className="py-24 bg-black relative overflow-hidden scroll-mt-16">
-        <GridPattern className="inset-0" />
+        <NetworkGrid className="inset-0" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#298DFF]/[0.03] rounded-full blur-3xl animate-pulse-glow pointer-events-none" />
 
         <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-10 relative">
@@ -127,7 +127,7 @@ export default function Home() {
 
       {/* ─── About ─── */}
       <section id="about" className="py-24 bg-black scroll-mt-16 relative overflow-hidden">
-        <GridPattern className="inset-0" />
+        <NetworkGrid className="inset-0" />
         <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-10 relative">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div className="animate-fade-left">

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useLanguage } from "@/lib/LanguageContext";
+import NetworkGrid from "@/components/NetworkGrid";
 
 interface Partner {
   name: string;
@@ -20,7 +21,8 @@ export default function Partners() {
 
   return (
     <section className="py-24 bg-black relative overflow-hidden">
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-10">
+      <NetworkGrid className="inset-0" />
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-10 relative">
         <div className="text-center mb-16">
           <span className="mono-label text-[#298DFF] mb-4 block">
             {locale === "pt" ? "Parceiros" : "Partners"}
