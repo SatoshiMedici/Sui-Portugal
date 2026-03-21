@@ -5,7 +5,7 @@
 export const SUINS_CONFIG = {
   parentName: "suiportugal",
   // Replace with the actual SuiNS NFT object ID for @suiportugal on mainnet.
-  parentNftId: "0xYOUR_PARENT_NFT_OBJECT_ID",
+  parentNftId: "0x849b1027d0d7de7912b072440234151a8e23919cf7dfafe54a691ded7635b6d7",
   // Max expiration: set to parent domain's expiration (update accordingly).
   expirationTimestampMs: Date.now() + 365 * 24 * 60 * 60 * 1000,
 };
