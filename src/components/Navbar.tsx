@@ -47,6 +47,7 @@ export default function Navbar() {
             <a href="#event" className={navLinkClass}>{t.nav.events}</a>
             <a href="#about" className={navLinkClass}>{t.nav.about}</a>
             <a href="#community" className={navLinkClass}>{t.nav.community}</a>
+            <a href="/claim" className="text-[#298DFF] hover:text-[#298DFF]/80 transition-colors duration-300 text-sm tracking-wide font-medium">{t.nav.claim}</a>
           </div>
 
           <div className="flex items-center gap-4">
@@ -122,6 +123,7 @@ export default function Navbar() {
             <a href="#event" onClick={() => setMenuOpen(false)} className={mobileLinkClass}>{t.nav.events}</a>
             <a href="#about" onClick={() => setMenuOpen(false)} className={mobileLinkClass}>{t.nav.about}</a>
             <a href="#community" onClick={() => setMenuOpen(false)} className={mobileLinkClass}>{t.nav.community}</a>
+            <a href="/claim" onClick={() => setMenuOpen(false)} className="block text-[#298DFF] hover:translate-x-1 transition-all duration-300 font-medium">{t.nav.claim}</a>
           </div>
         </div>
       </div>
