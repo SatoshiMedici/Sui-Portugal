@@ -45,13 +45,26 @@ export async function POST(request: NextRequest) {
     const transaction = new Transaction();
     const suinsTx = new SuinsTransaction(suinsClient, transaction);
 
-    const leafName = `${name.toLowerCase().trim()}.${SUINS_CONFIG.parentName}.sui`;
+    const subName = `${name.toLowerCase().trim()}.${SUINS_CONFIG.parentName}.sui`;
 
-    suinsTx.createLeafSubName({
+    // Create a full subdomain NFT (not a leaf) so the user gets ownership
+    const subNft = suinsTx.createSubName({
       parentNft: SUINS_CONFIG.parentNftId,
-      name: leafName,
-      targetAddress,
+      name: subName,
+      expirationTimestampMs: SUINS_CONFIG.expirationTimestampMs,
+      allowChildCreation: false,
+      allowTimeExtension: false,
     });
+
+    // Set the target address so the name resolves to the claimer's wallet
+    suinsTx.setTargetAddress({
+      nft: subNft,
+      address: targetAddress,
+      isSubname: true,
+    });
+
+    // Transfer the subdomain NFT to the claimer's wallet
+    transaction.transferObjects([subNft], targetAddress);
 
     const result = await client.signAndExecuteTransaction({
       transaction,
@@ -61,7 +74,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       digest: result.digest,
-      name: leafName,
+      name: subName,
     });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : "Unknown error";
