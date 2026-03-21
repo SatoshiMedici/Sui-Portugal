@@ -208,6 +208,7 @@ function ClaimPageInner() {
               </div>
 
               <ClaimForm
+                email={email}
                 subname={subname}
                 onBack={() => setStep("name")}
                 onSuccess={() => setStep("done")}

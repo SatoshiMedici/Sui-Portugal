@@ -4,14 +4,10 @@ import { useState } from "react";
 import {
   ConnectButton,
   useCurrentAccount,
-  useSignAndExecuteTransaction,
-  useSuiClient,
 } from "@mysten/dapp-kit";
-import { Transaction } from "@mysten/sui/transactions";
-import { SuinsClient, SuinsTransaction } from "@mysten/suins";
-import { SUINS_CONFIG } from "@/lib/claim-config";
 
 interface ClaimFormProps {
+  email: string;
   subname: string;
   onBack: () => void;
   onSuccess: () => void;
@@ -21,6 +17,7 @@ interface ClaimFormProps {
 }
 
 export default function ClaimForm({
+  email,
   subname,
   onBack,
   onSuccess,
@@ -29,8 +26,6 @@ export default function ClaimForm({
   connectLabel,
 }: ClaimFormProps) {
   const account = useCurrentAccount();
-  const suiClient = useSuiClient();
-  const { mutateAsync: signAndExecute } = useSignAndExecuteTransaction();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -40,33 +35,26 @@ export default function ClaimForm({
     setError("");
 
     try {
-      const suinsClient = new SuinsClient({
-        client: suiClient,
-        network: "mainnet",
+      const res = await fetch("/api/claim", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          name: subname,
+          targetAddress: account.address,
+        }),
       });
 
-      const transaction = new Transaction();
-      const suinsTx = new SuinsTransaction(suinsClient, transaction);
+      const data = await res.json();
 
-      const leafName = `${subname.toLowerCase().trim()}.${SUINS_CONFIG.parentName}.sui`;
+      if (!res.ok) {
+        throw new Error(data.error || "Claim failed");
+      }
 
-      suinsTx.createLeafSubName({
-        parentNft: SUINS_CONFIG.parentNftId,
-        name: leafName,
-        targetAddress: account.address,
-      });
-
-      await signAndExecute({ transaction });
       onSuccess();
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Transaction failed";
-      if (message.includes("rejected")) {
-        setError("Transaction was rejected by wallet.");
-      } else if (message.includes("parent")) {
-        setError("The connected wallet does not hold the parent domain NFT. Only the @suiportugal admin can create subdomains.");
-      } else {
-        setError(message);
-      }
+      const message = err instanceof Error ? err.message : "Claim failed";
+      setError(message);
     } finally {
       setLoading(false);
     }
