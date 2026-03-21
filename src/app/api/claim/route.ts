@@ -4,6 +4,7 @@ import { Transaction } from "@mysten/sui/transactions";
 import { Ed25519Keypair } from "@mysten/sui/keypairs/ed25519";
 import { SuinsClient, SuinsTransaction } from "@mysten/suins";
 import { isEmailAllowed, isValidSubdomain, SUINS_CONFIG } from "@/lib/claim-config";
+import { isEmailVerified } from "@/lib/otp-store";
 
 function getAdminKeypair(): Ed25519Keypair {
   const key = process.env.SUINS_ADMIN_PRIVATE_KEY;
@@ -22,6 +23,10 @@ export async function POST(request: NextRequest) {
 
     if (!isEmailAllowed(email)) {
       return NextResponse.json({ error: "Email not on allowlist" }, { status: 403 });
+    }
+
+    if (!isEmailVerified(email.toLowerCase().trim())) {
+      return NextResponse.json({ error: "Email not verified" }, { status: 403 });
     }
 
     const validation = isValidSubdomain(name);

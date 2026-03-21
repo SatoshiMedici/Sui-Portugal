@@ -3,12 +3,12 @@
 import { useState, useCallback } from "react";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useScrollAnimations } from "@/hooks/useInView";
-import { isEmailAllowed, isValidSubdomain, SUINS_CONFIG } from "@/lib/claim-config";
+import { isValidSubdomain, SUINS_CONFIG } from "@/lib/claim-config";
 import NetworkGrid from "@/components/NetworkGrid";
 import SuiProviders from "@/components/SuiProviders";
 import ClaimForm from "./ClaimForm";
 
-type Step = "email" | "name" | "wallet" | "done";
+type Step = "email" | "verify" | "name" | "wallet" | "done";
 
 function ClaimPageInner() {
   const { t } = useLanguage();
@@ -17,23 +17,102 @@ function ClaimPageInner() {
   const [step, setStep] = useState<Step>("email");
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [otpCode, setOtpCode] = useState("");
+  const [otpError, setOtpError] = useState("");
+  const [otpLoading, setOtpLoading] = useState(false);
   const [subname, setSubname] = useState("");
   const [nameError, setNameError] = useState("");
 
   const ct = (t as Record<string, unknown>).claim as Record<string, string>;
 
-  const handleEmailSubmit = useCallback(() => {
+  const handleEmailSubmit = useCallback(async () => {
     const trimmed = email.toLowerCase().trim();
     if (!trimmed || !trimmed.includes("@")) {
       setEmailError(ct.emailInvalid);
       return;
     }
-    if (!isEmailAllowed(trimmed)) {
-      setEmailError(ct.emailNotAllowed);
+
+    setOtpLoading(true);
+    setEmailError("");
+
+    try {
+      const res = await fetch("/api/send-code", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: trimmed }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setEmailError(data.error === "Email not on allowlist" ? ct.emailNotAllowed : data.error);
+        return;
+      }
+
+      setStep("verify");
+    } catch {
+      setEmailError(ct.otpSendFailed);
+    } finally {
+      setOtpLoading(false);
+    }
+  }, [email, ct]);
+
+  const handleVerifyCode = useCallback(async () => {
+    const code = otpCode.trim();
+    if (!code || code.length !== 6) {
+      setOtpError(ct.otpInvalidCode);
       return;
     }
-    setEmailError("");
-    setStep("name");
+
+    setOtpLoading(true);
+    setOtpError("");
+
+    try {
+      const res = await fetch("/api/verify-code", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.toLowerCase().trim(), code }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setOtpError(data.error);
+        return;
+      }
+
+      setStep("name");
+    } catch {
+      setOtpError(ct.otpVerifyFailed);
+    } finally {
+      setOtpLoading(false);
+    }
+  }, [otpCode, email, ct]);
+
+  const handleResendCode = useCallback(async () => {
+    setOtpLoading(true);
+    setOtpError("");
+    setOtpCode("");
+
+    try {
+      const res = await fetch("/api/send-code", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.toLowerCase().trim() }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        setOtpError(data.error);
+        return;
+      }
+
+      setOtpError(ct.otpResent);
+    } catch {
+      setOtpError(ct.otpSendFailed);
+    } finally {
+      setOtpLoading(false);
+    }
   }, [email, ct]);
 
   const handleNameSubmit = useCallback(() => {
@@ -48,9 +127,12 @@ function ClaimPageInner() {
 
   const fullName = `${subname.toLowerCase().trim()}@${SUINS_CONFIG.parentName}`;
 
+  const stepList: Step[] = ["email", "verify", "name", "wallet"];
+  const stepIndex = (s: Step) => stepList.indexOf(s);
+
   return (
     <>
-      {/* ─── Hero ─── */}
+      {/* Hero */}
       <section className="relative bg-black min-h-[50vh] flex items-center overflow-hidden">
         <NetworkGrid className="inset-0" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#298DFF]/[0.04] rounded-full blur-3xl animate-pulse-glow pointer-events-none" />
@@ -76,25 +158,25 @@ function ClaimPageInner() {
         </div>
       </section>
 
-      {/* ─── Claim Flow ─── */}
+      {/* Claim Flow */}
       <section className="py-16 bg-black relative overflow-hidden">
         <NetworkGrid className="inset-0" />
         <div className="max-w-[600px] mx-auto px-6 sm:px-8 relative">
 
           {/* Step indicators */}
           <div className="flex items-center justify-center gap-2 mb-12">
-            {(["email", "name", "wallet"] as Step[]).map((s, i) => (
+            {stepList.map((s, i) => (
               <div key={s} className="flex items-center gap-2">
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
                     step === s
                       ? "bg-[#298DFF] text-white"
-                      : step === "done" || (["email", "name", "wallet"].indexOf(step) > i)
+                      : step === "done" || stepIndex(step) > i
                       ? "bg-[#298DFF]/20 text-[#298DFF]"
                       : "bg-white/[0.06] text-white/30"
                   }`}
                 >
-                  {step === "done" || (["email", "name", "wallet"].indexOf(step) > i) ? (
+                  {step === "done" || stepIndex(step) > i ? (
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
@@ -102,9 +184,9 @@ function ClaimPageInner() {
                     i + 1
                   )}
                 </div>
-                {i < 2 && (
+                {i < stepList.length - 1 && (
                   <div className={`w-12 h-[1px] transition-colors duration-300 ${
-                    ["email", "name", "wallet"].indexOf(step) > i || step === "done"
+                    stepIndex(step) > i || step === "done"
                       ? "bg-[#298DFF]/40"
                       : "bg-white/[0.08]"
                   }`} />
@@ -129,6 +211,7 @@ function ClaimPageInner() {
                     placeholder="your@email.com"
                     className="w-full px-4 py-3.5 bg-white/[0.04] border border-white/[0.1] rounded-xl text-white placeholder:text-white/20 focus:outline-none focus:border-[#298DFF]/50 focus:ring-1 focus:ring-[#298DFF]/30 transition-all"
                     autoFocus
+                    disabled={otpLoading}
                   />
                   {emailError && (
                     <p className="text-red-400 text-sm mt-2">{emailError}</p>
@@ -136,15 +219,76 @@ function ClaimPageInner() {
                 </div>
                 <button
                   onClick={handleEmailSubmit}
-                  className="w-full btn-shine px-6 py-3.5 bg-[#298DFF] hover:bg-[#1a7ae6] text-white font-medium rounded-xl transition-all duration-300 hover:-translate-y-0.5"
+                  disabled={otpLoading}
+                  className="w-full btn-shine px-6 py-3.5 bg-[#298DFF] hover:bg-[#1a7ae6] text-white font-medium rounded-xl transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
                 >
-                  {ct.emailCta}
+                  {otpLoading ? ct.otpSending : ct.otpSendCode}
                 </button>
               </div>
             </div>
           )}
 
-          {/* Step 2: Choose name */}
+          {/* Step 2: Verify code */}
+          {step === "verify" && (
+            <div className="animate-on-scroll">
+              <h2 className="text-2xl font-bold text-white mb-2 tracking-tight">{ct.otpTitle}</h2>
+              <p className="text-white/40 text-sm mb-8">
+                {ct.otpDesc} <span className="text-white/60 font-medium">{email}</span>
+              </p>
+
+              <div className="space-y-4">
+                <div>
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    value={otpCode}
+                    onChange={(e) => {
+                      const v = e.target.value.replace(/\D/g, "").slice(0, 6);
+                      setOtpCode(v);
+                      setOtpError("");
+                    }}
+                    onKeyDown={(e) => e.key === "Enter" && handleVerifyCode()}
+                    placeholder="000000"
+                    className="w-full px-4 py-3.5 bg-white/[0.04] border border-white/[0.1] rounded-xl text-white text-center text-2xl tracking-[0.3em] font-mono placeholder:text-white/20 focus:outline-none focus:border-[#298DFF]/50 focus:ring-1 focus:ring-[#298DFF]/30 transition-all"
+                    autoFocus
+                    disabled={otpLoading}
+                    maxLength={6}
+                  />
+                  {otpError && (
+                    <p className={`text-sm mt-2 ${otpError === ct.otpResent ? "text-[#298DFF]" : "text-red-400"}`}>
+                      {otpError}
+                    </p>
+                  )}
+                </div>
+
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => { setStep("email"); setOtpCode(""); setOtpError(""); }}
+                    className="px-6 py-3.5 bg-white/[0.06] hover:bg-white/[0.1] text-white/60 font-medium rounded-xl transition-all duration-300 border border-white/[0.08]"
+                  >
+                    {ct.backBtn}
+                  </button>
+                  <button
+                    onClick={handleVerifyCode}
+                    disabled={otpLoading || otpCode.length !== 6}
+                    className="flex-1 btn-shine px-6 py-3.5 bg-[#298DFF] hover:bg-[#1a7ae6] text-white font-medium rounded-xl transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                  >
+                    {otpLoading ? ct.otpVerifying : ct.otpVerify}
+                  </button>
+                </div>
+
+                <button
+                  onClick={handleResendCode}
+                  disabled={otpLoading}
+                  className="w-full text-center text-white/30 hover:text-white/60 text-sm transition-colors disabled:opacity-50"
+                >
+                  {ct.otpResend}
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Step 3: Choose name */}
           {step === "name" && (
             <div className="animate-on-scroll">
               <h2 className="text-2xl font-bold text-white mb-2 tracking-tight">{ct.nameTitle}</h2>
@@ -178,7 +322,7 @@ function ClaimPageInner() {
 
                 <div className="flex gap-3">
                   <button
-                    onClick={() => setStep("email")}
+                    onClick={() => setStep("verify")}
                     className="px-6 py-3.5 bg-white/[0.06] hover:bg-white/[0.1] text-white/60 font-medium rounded-xl transition-all duration-300 border border-white/[0.08]"
                   >
                     {ct.backBtn}
@@ -194,7 +338,7 @@ function ClaimPageInner() {
             </div>
           )}
 
-          {/* Step 3: Connect wallet & claim */}
+          {/* Step 4: Connect wallet & claim */}
           {step === "wallet" && (
             <div className="animate-on-scroll">
               <h2 className="text-2xl font-bold text-white mb-2 tracking-tight">{ct.walletTitle}</h2>
@@ -219,7 +363,7 @@ function ClaimPageInner() {
             </div>
           )}
 
-          {/* Step 4: Done */}
+          {/* Step 5: Done */}
           {step === "done" && (
             <div className="animate-on-scroll text-center">
               <div className="w-16 h-16 rounded-full bg-[#298DFF]/20 flex items-center justify-center mx-auto mb-6">
