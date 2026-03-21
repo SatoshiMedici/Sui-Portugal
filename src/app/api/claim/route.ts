@@ -45,8 +45,14 @@ export async function POST(request: NextRequest) {
 
     const subName = `${name.toLowerCase().trim()}.${SUINS_CONFIG.parentName}.sui`;
 
-    // If a leaf subdomain already exists, remove it first in a separate transaction
-    const existingRecord = await suinsClient.getNameRecord(subName);
+    // If a leaf subdomain already exists, remove it first in a separate transaction.
+    // getNameRecord throws when the dynamic field doesn't exist, so we catch that.
+    let existingRecord = null;
+    try {
+      existingRecord = await suinsClient.getNameRecord(subName);
+    } catch {
+      // Name doesn't exist yet — this is expected for new claims
+    }
     if (existingRecord) {
       const removeTx = new Transaction();
       const removeSuinsTx = new SuinsTransaction(suinsClient, removeTx);
