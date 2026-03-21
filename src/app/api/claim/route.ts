@@ -5,8 +5,6 @@ import { Ed25519Keypair } from "@mysten/sui/keypairs/ed25519";
 import { SuinsClient, SuinsTransaction } from "@mysten/suins";
 import { isEmailAllowed, isValidSubdomain, SUINS_CONFIG } from "@/lib/claim-config";
 
-const client = new SuiJsonRpcClient({ url: getJsonRpcFullnodeUrl("mainnet"), network: "mainnet" });
-
 function getAdminKeypair(): Ed25519Keypair {
   const key = process.env.SUINS_ADMIN_PRIVATE_KEY;
   if (!key) throw new Error("SUINS_ADMIN_PRIVATE_KEY not configured");
@@ -36,6 +34,9 @@ export async function POST(request: NextRequest) {
     }
 
     const keypair = getAdminKeypair();
+
+    // Create a fresh client per request to avoid stale gas coin references
+    const client = new SuiJsonRpcClient({ url: getJsonRpcFullnodeUrl("mainnet"), network: "mainnet" });
 
     const suinsClient = new SuinsClient({
       client,
