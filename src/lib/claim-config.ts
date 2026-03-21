@@ -6,8 +6,10 @@ export const SUINS_CONFIG = {
   parentName: "suiportugal",
   // Replace with the actual SuiNS NFT object ID for @suiportugal on mainnet.
   parentNftId: "0x849b1027d0d7de7912b072440234151a8e23919cf7dfafe54a691ded7635b6d7",
-  // Max expiration: set to parent domain's expiration (update accordingly).
-  expirationTimestampMs: Date.now() + 365 * 24 * 60 * 60 * 1000,
+  // Subdomain expiration: MUST NOT exceed parent domain's expiration.
+  // Using 30 days from now as a safe default for testing.
+  // TODO: Query the parent's actual expiration and set this accordingly.
+  expirationTimestampMs: Date.now() + 30 * 24 * 60 * 60 * 1000,
 };
 
 // ─── Email Allowlist ───
