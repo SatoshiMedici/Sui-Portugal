@@ -14,9 +14,7 @@ export const SUINS_CONFIG = {
 // Emails of attendees who are eligible to claim a subdomain.
 // All emails are stored lowercase for case-insensitive matching.
 export const ALLOWLIST: string[] = [
-  // Add attendee emails here, e.g.:
-  // "alice@example.com",
-  // "bob@example.com",
+  "mario@interestprotocol.com",
 ];
 
 export function isEmailAllowed(email: string): boolean {
