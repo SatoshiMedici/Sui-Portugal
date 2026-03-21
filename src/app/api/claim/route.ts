@@ -47,6 +47,15 @@ export async function POST(request: NextRequest) {
 
     const subName = `${name.toLowerCase().trim()}.${SUINS_CONFIG.parentName}.sui`;
 
+    // Remove any existing leaf subdomain record (e.g. from a previous claim attempt)
+    const existingRecord = await suinsClient.getNameRecord(subName);
+    if (existingRecord) {
+      suinsTx.removeLeafSubName({
+        parentNft: SUINS_CONFIG.parentNftId,
+        name: subName,
+      });
+    }
+
     // Create a full subdomain NFT (not a leaf) so the user gets ownership
     const subNft = suinsTx.createSubName({
       parentNft: SUINS_CONFIG.parentNftId,
